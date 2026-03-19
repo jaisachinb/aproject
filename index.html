@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Apex — Know Your Rank. Get the Job.</title>
-<meta name="description" content="Upload your CV, get your talent percentile, and apply to matched roles.">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -25,28 +24,22 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--tx)
 .hidden{display:none!important}
 .wrap{max-width:1020px;margin:0 auto;padding:0 1.5rem}
 .wrap-sm{max-width:680px;margin:0 auto;padding:0 1.5rem}
-
-/* NAV */
 nav{position:sticky;top:0;z-index:200;background:rgba(7,9,14,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--b1)}
 .nav-in{max-width:1020px;margin:0 auto;padding:0 1.5rem;height:56px;display:flex;align-items:center;justify-content:space-between}
 .brand{font-weight:700;font-size:20px;letter-spacing:-0.5px;cursor:pointer}
-.brand b{color:var(--au);font-weight:700}
+.brand b{color:var(--au)}
 .ntabs{display:flex;background:var(--s1);border:1px solid var(--b2);border-radius:8px;overflow:hidden}
 .nt{padding:6px 16px;font-size:13px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--t2);font-family:'Space Grotesk',sans-serif;transition:all .14s}
 .nt.on{background:var(--s3);color:var(--tx)}
 .live{width:7px;height:7px;border-radius:50%;background:var(--gn);box-shadow:0 0 8px rgba(40,201,154,.5)}
 .flex{display:flex}.aic{align-items:center}.jb{justify-content:space-between}.gap8{gap:8px}.gap14{gap:14px}
-
-/* BUTTONS */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .14s;font-family:'Space Grotesk',sans-serif;white-space:nowrap}
-.btn-au{background:var(--au);color:#060300}.btn-au:hover{background:var(--au2);transform:translateY(-1px);box-shadow:0 8px 22px rgba(232,160,32,.28)}
+.btn-au{background:var(--au);color:#060300}.btn-au:hover{background:var(--au2);transform:translateY(-1px)}
 .btn-ghost{background:transparent;border:1px solid var(--b2);color:var(--t2)}.btn-ghost:hover{border-color:var(--b3);color:var(--tx)}
 .btn-gn{background:var(--gnf);border:1px solid var(--gnr);color:var(--gn)}
-.btn-up{background:linear-gradient(135deg,#8B5CF6,#6366F1);color:#fff;border:none}.btn-up:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(99,102,241,.35)}
+.btn-up{background:linear-gradient(135deg,#8B5CF6,#6366F1);color:#fff;border:none}
 .btn-sm{padding:7px 14px;font-size:12px}
-.btn:disabled{opacity:.38;cursor:not-allowed;transform:none!important;box-shadow:none!important}
-
-/* FORMS */
+.btn:disabled{opacity:.38;cursor:not-allowed;transform:none!important}
 .lbl{display:block;font-size:11px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.10em;margin-bottom:6px;font-family:'Space Mono',monospace}
 .inp{width:100%;background:var(--s2);border:1px solid var(--b2);border-radius:8px;padding:10px 13px;color:var(--tx);font-family:'Space Grotesk',sans-serif;font-size:14px;outline:none;transition:border-color .15s;-webkit-appearance:none}
 .inp:focus{border-color:var(--au);background:var(--s3)}
@@ -54,11 +47,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(7,9,14,0.92);backdrop-filt
 select.inp option{background:var(--s2)}
 textarea.inp{resize:vertical;line-height:1.65}
 .frow{margin-bottom:1rem}
-
-/* CARDS */
 .card{background:var(--s1);border:1px solid var(--b1);border-radius:14px;padding:1.4rem}
-
-/* PILLS */
 .pill{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-family:'Space Mono',monospace;font-size:11px}
 .pill-au{background:var(--auf);color:var(--au);border:1px solid var(--aur)}
 .pill-bl{background:var(--blf);color:var(--bl);border:1px solid var(--blr)}
@@ -68,44 +57,37 @@ textarea.inp{resize:vertical;line-height:1.65}
 .tag{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:500;margin:2px}
 .tag-gn{background:var(--gnf);color:var(--gn);border:1px solid var(--gnr)}
 .tag-rd{background:var(--rdf);color:var(--rd);border:1px solid rgba(245,82,82,.25)}
-
-/* ALERT */
 .alert{padding:10px 13px;border-radius:8px;font-size:13px;display:none;margin-bottom:1rem}
 .alert.on{display:block}
 .alert-err{background:var(--rdf);border:1px solid rgba(245,82,82,.3);color:var(--rd)}
-
-/* GRID */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 .mb1{margin-bottom:.75rem}.mb2{margin-bottom:1.25rem}.mb3{margin-bottom:2rem}
-
-/* ── LANDING ── */
-.hero{padding:5.5rem 0 4rem;text-align:center}
+.hero{padding:5rem 0 3.5rem;text-align:center}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:5px 16px;background:var(--auf);border:1px solid var(--aur);border-radius:30px;font-family:'Space Mono',monospace;font-size:10px;color:var(--au);letter-spacing:.10em;margin-bottom:1.75rem}
-.h1{font-size:clamp(36px,7vw,70px);line-height:1.04;letter-spacing:-2px;font-weight:700;margin-bottom:1.2rem}
+.h1{font-size:clamp(36px,7vw,68px);line-height:1.04;letter-spacing:-2px;font-weight:700;margin-bottom:1.2rem}
 .h1 .it{font-style:italic;font-family:'Lora',serif;color:var(--au)}
 .hero-p{font-size:17px;color:var(--t2);max-width:480px;margin:0 auto 2.5rem;line-height:1.75;font-weight:300}
-.hero-btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:4rem}
-.proof-row{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;padding:2.5rem 0;border-top:1px solid var(--b1)}
-.proof-n{font-family:'Space Mono',monospace;font-size:28px;font-weight:700;color:var(--au);line-height:1}
+.hero-btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:3.5rem}
+.proof-row{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;padding:2rem 0;border-top:1px solid var(--b1)}
+.proof-n{font-family:'Space Mono',monospace;font-size:26px;font-weight:700;color:var(--au);line-height:1}
 .proof-l{font-size:12px;color:var(--t3);margin-top:4px}
 .land-sec{padding:3rem 0;border-top:1px solid var(--b1)}
 .sec-tag{font-family:'Space Mono',monospace;font-size:10px;color:var(--t3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:1rem}
-.sec-h{font-size:clamp(22px,4vw,36px);letter-spacing:-1px;font-weight:700;margin-bottom:.5rem}
-.sec-p{font-size:15px;color:var(--t2);margin-bottom:2.5rem;font-weight:300;line-height:1.7}
+.sec-h{font-size:clamp(22px,4vw,34px);letter-spacing:-1px;font-weight:700;margin-bottom:.5rem}
+.sec-p{font-size:15px;color:var(--t2);margin-bottom:2rem;font-weight:300;line-height:1.7}
 .steps-g{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.step-c{background:var(--s1);border:1px solid var(--b1);border-radius:14px;padding:1.4rem;position:relative;overflow:hidden}
-.step-c::before{content:attr(data-n);position:absolute;top:-10px;right:10px;font-size:80px;font-weight:700;color:rgba(255,255,255,.018);line-height:1}
+.step-c{background:var(--s1);border:1px solid var(--b1);border-radius:14px;padding:1.4rem}
 .step-n{font-family:'Space Mono',monospace;font-size:10px;color:var(--au);margin-bottom:10px}
 .step-t{font-size:15px;font-weight:600;margin-bottom:6px}
 .step-d{font-size:13px;color:var(--t2);line-height:1.6;font-weight:300}
-.cohort-g{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.coh-g{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .coh-c{background:var(--s1);border:1px solid var(--b1);border-radius:14px;padding:1.4rem}
 .coh-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.75rem}
 .coh-title{font-size:15px;font-weight:600}
 .coh-age{font-family:'Space Mono',monospace;font-size:10px;color:var(--t3);margin-top:3px}
 .model-card{background:var(--s1);border:1px solid var(--b1);border-radius:14px;padding:2rem}
-.model-g{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
+.model-g{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
 .model-p{font-size:14px;color:var(--t2);line-height:1.8;font-weight:300;margin-bottom:1rem}
 .lockbox{background:var(--s2);border:1px solid var(--b2);border-radius:12px;padding:1.2rem}
 .lock-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--b1);font-size:13px}
@@ -117,20 +99,16 @@ textarea.inp{resize:vertical;line-height:1.65}
 .lock-sub{font-size:11px;color:var(--t3);margin-top:1px}
 .price-g{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .price-c{background:var(--s1);border:1px solid var(--b1);border-radius:14px;padding:1.5rem;position:relative}
-.price-c.feat{border-color:rgba(139,92,246,.4);background:linear-gradient(160deg,var(--s1),rgba(99,102,241,.04))}
+.price-c.feat{border-color:rgba(139,92,246,.4)}
 .feat-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#8B5CF6,#6366F1);color:#fff;font-size:10px;font-weight:600;padding:3px 12px;border-radius:20px;white-space:nowrap;font-family:'Space Mono',monospace}
 .price-tier{font-family:'Space Mono',monospace;font-size:10px;color:var(--t3);letter-spacing:.12em;margin-bottom:.75rem}
-.price-n{font-size:34px;font-weight:700;font-family:'Space Mono',monospace;letter-spacing:-1px;line-height:1;margin-bottom:4px}
+.price-n{font-size:32px;font-weight:700;font-family:'Space Mono',monospace;letter-spacing:-1px;line-height:1;margin-bottom:4px}
 .price-n span{font-size:16px;font-weight:400;color:var(--t2)}
 .price-per{font-size:12px;color:var(--t3);margin-bottom:1.25rem;font-family:'Space Mono',monospace}
 .price-items{display:flex;flex-direction:column;gap:8px;margin-bottom:1.5rem}
 .pi{display:flex;align-items:flex-start;gap:8px;font-size:13px}
-.pi-ok{color:var(--gn);flex-shrink:0;margin-top:2px}
-.pi-no{color:var(--t3);flex-shrink:0;margin-top:2px}
-.pi-t{color:var(--t2);font-weight:300;line-height:1.45}
-.pi-t.on{color:var(--tx)}
-
-/* ── UPLOAD ── */
+.pi-ok{color:var(--gn);flex-shrink:0}.pi-no{color:var(--t3);flex-shrink:0}
+.pi-t{color:var(--t2);font-weight:300;line-height:1.45}.pi-t.on{color:var(--tx)}
 .up-page{padding:2.5rem 0}
 .up-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:16px;align-items:start}
 .dzone{border:1.5px dashed var(--b2);border-radius:12px;padding:2.2rem 1.5rem;text-align:center;cursor:pointer;transition:all .2s;background:var(--s2);position:relative;margin-bottom:1rem}
@@ -139,7 +117,7 @@ textarea.inp{resize:vertical;line-height:1.65}
 .dz-ic{width:42px;height:42px;margin:0 auto .9rem;background:var(--auf);border:1px solid var(--aur);border-radius:9px;display:flex;align-items:center;justify-content:center}
 .dz-t{font-size:14px;font-weight:600;margin-bottom:3px}
 .dz-s{font-size:12px;color:var(--t3);font-weight:300}
-.dz-name{font-family:'Space Mono',monospace;font-size:11px;color:var(--gn);margin-top:8px;min-height:1px}
+.dz-name{font-family:'Space Mono',monospace;font-size:11px;color:var(--gn);margin-top:8px;min-height:16px}
 .divider{display:flex;align-items:center;gap:10px;margin-bottom:1rem}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--b1)}
 .divider span{font-size:10px;color:var(--t3);font-family:'Space Mono',monospace}
@@ -155,8 +133,6 @@ textarea.inp{resize:vertical;line-height:1.65}
 @keyframes spin{to{transform:rotate(360deg)}}
 .sc-m{font-size:15px;color:var(--t2);margin-bottom:5px}
 .sc-s{font-family:'Space Mono',monospace;font-size:11px;color:var(--t3)}
-
-/* ── RESULT ── */
 .res-page{padding:2rem 0}
 .res-hero{background:var(--s1);border:1px solid var(--b1);border-radius:14px;padding:1.75rem;margin-bottom:14px;display:grid;grid-template-columns:auto 1fr;gap:1.75rem;align-items:center}
 .ring-wrap{position:relative;display:inline-block;flex-shrink:0}
@@ -166,14 +142,13 @@ textarea.inp{resize:vertical;line-height:1.65}
 .res-h{font-size:22px;font-weight:700;letter-spacing:-.4px;margin-bottom:7px}
 .res-q{font-size:14px;color:var(--t2);font-weight:300;line-height:1.7;font-style:italic;font-family:'Lora',serif}
 .res-badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-.free-boost{background:linear-gradient(135deg,var(--s1),rgba(232,160,32,.03));border:1px solid var(--aur);border-radius:14px;padding:1.4rem;margin-bottom:14px}
+.free-boost{background:var(--s1);border:1px solid var(--aur);border-radius:14px;padding:1.4rem;margin-bottom:14px}
 .fb-h{font-family:'Space Mono',monospace;font-size:10px;color:var(--au);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
 .fb-row{display:flex;align-items:flex-start;gap:10px;font-size:14px}
 .fb-arr{font-family:'Space Mono',monospace;color:var(--au);flex-shrink:0;margin-top:2px}
 .fb-text{color:var(--t2);font-weight:300;flex:1;line-height:1.65}
 .fb-gain{font-family:'Space Mono',monospace;font-size:12px;color:var(--gn);white-space:nowrap;padding-left:10px}
-.paywall{background:linear-gradient(135deg,rgba(139,92,246,.06),rgba(99,102,241,.06));border:1px solid rgba(139,92,246,.25);border-radius:14px;padding:1.5rem;margin-bottom:14px;text-align:center}
-.pw-lock{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(99,102,241,.15));border:1px solid rgba(139,92,246,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem}
+.paywall{background:var(--s1);border:1px solid rgba(139,92,246,.25);border-radius:14px;padding:1.5rem;margin-bottom:14px;text-align:center}
 .pw-t{font-size:16px;font-weight:700;margin-bottom:6px}
 .pw-p{font-size:13px;color:var(--t2);font-weight:300;line-height:1.65;max-width:420px;margin:0 auto 1.25rem}
 .pw-list{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-bottom:1.25rem}
@@ -197,9 +172,7 @@ textarea.inp{resize:vertical;line-height:1.65}
 .job-det{font-size:12px;color:var(--t2);font-weight:300;margin-top:1px}
 .job-meta{font-size:11px;color:var(--t3);margin-top:2px;font-family:'Space Mono',monospace}
 .job-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.apply-bar{background:linear-gradient(135deg,var(--s1),rgba(232,160,32,.03));border:1px solid var(--aur);border-radius:14px;padding:1.25rem;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:12px}
-
-/* ── TRACK ── */
+.apply-bar{background:var(--s1);border:1px solid var(--aur);border-radius:14px;padding:1.25rem;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:12px}
 .track-page{padding:2.5rem 0}
 .pipe-card{background:var(--s1);border:1px solid var(--b1);border-radius:14px;padding:1.5rem;margin-bottom:12px}
 .pc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:10px}
@@ -214,25 +187,13 @@ textarea.inp{resize:vertical;line-height:1.65}
 .pl{font-size:10px;margin-top:5px;text-align:center;color:var(--t3);line-height:1.3;max-width:62px}
 .pl.done{color:var(--gn)}.pl.cur{color:var(--au)}
 .pc-note{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--b1);font-size:13px;color:var(--t2);font-style:italic;font-family:'Lora',serif;font-weight:300}
-
 footer{border-top:1px solid var(--b1);padding:2rem 0;text-align:center;font-size:12px;color:var(--t3);margin-top:3rem}
 footer b{color:var(--au);font-weight:400}
-
-@media(max-width:760px){
-  .up-grid,.model-g{grid-template-columns:1fr}
-  .res-hero{grid-template-columns:1fr}
-  .ring-wrap{display:none}
-  .steps-g,.cohort-g,.price-g,.g3{grid-template-columns:1fr 1fr}
-}
-@media(max-width:480px){
-  .steps-g,.cohort-g,.price-g{grid-template-columns:1fr}
-  .ntabs{display:none}
-  .h1{letter-spacing:-1.2px}
-}
+@media(max-width:760px){.up-grid,.model-g{grid-template-columns:1fr}.res-hero{grid-template-columns:1fr}.ring-wrap{display:none}.steps-g,.coh-g,.price-g,.g3{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.steps-g,.coh-g,.price-g{grid-template-columns:1fr}.ntabs{display:none}.h1{letter-spacing:-1px}}
 </style>
 </head>
 <body>
-
 <nav>
   <div class="nav-in">
     <div class="brand" onclick="goPage('landing')">apex<b>.</b></div>
@@ -242,150 +203,122 @@ footer b{color:var(--au);font-weight:400}
       <button class="nt" id="nt-track" onclick="goPage('track')">My applications</button>
     </div>
     <div class="flex aic gap14">
-      <button class="btn btn-up btn-sm" onclick="goSection('pricing')">Upgrade ✦</button>
+      <button class="btn btn-up btn-sm" onclick="goSection('pricing')">Upgrade</button>
       <div class="live"></div>
     </div>
   </div>
 </nav>
-
-<!-- ══════════ LANDING ══════════ -->
+<!-- LANDING -->
 <div id="page-landing" class="page show">
-  <div class="hero">
-    <div class="wrap-sm">
-      <div class="eyebrow"><div class="live"></div>GLOBAL TALENT INTELLIGENCE</div>
-      <h1 class="h1">Know exactly<br><span class="it">where you stand.</span></h1>
-      <p class="hero-p">Upload your CV. Get your percentile within your experience cohort. See what to improve. Apply to matched roles in one click.</p>
-      <div class="hero-btns">
-        <button class="btn btn-au" style="font-size:15px;padding:13px 34px" onclick="goPage('upload')">Upload my CV →</button>
-        <button class="btn btn-ghost" style="font-size:15px;padding:13px 26px" onclick="goPage('jobs')">Browse open roles</button>
+  <div class="hero"><div class="wrap-sm">
+    <div class="eyebrow"><div class="live"></div>GLOBAL TALENT INTELLIGENCE</div>
+    <h1 class="h1">Know exactly<br><span class="it">where you stand.</span></h1>
+    <p class="hero-p">Upload your CV. Get your percentile within your experience cohort. See what to improve. Apply in one click.</p>
+    <div class="hero-btns">
+      <button class="btn btn-au" style="font-size:15px;padding:13px 34px" onclick="goPage('upload')">Upload my CV</button>
+      <button class="btn btn-ghost" style="font-size:15px;padding:13px 26px" onclick="goPage('jobs')">Browse open roles</button>
+    </div>
+    <div class="proof-row">
+      <div><div class="proof-n">50k+</div><div class="proof-l">Synthetic CVs trained on</div></div>
+      <div><div class="proof-n">3</div><div class="proof-l">Experience cohorts</div></div>
+      <div><div class="proof-n">Global</div><div class="proof-l">Candidates scored worldwide</div></div>
+      <div><div class="proof-n">6</div><div class="proof-l">Pipeline stages</div></div>
+    </div>
+  </div></div>
+  <div class="land-sec"><div class="wrap">
+    <div class="sec-tag">HOW IT WORKS</div>
+    <h2 class="sec-h">Four steps to your rank.</h2>
+    <p class="sec-p">Upload your CV and get your global talent percentile — honest, cohort-relative, role-specific.</p>
+    <div class="steps-g">
+      <div class="step-c"><div class="step-n">01</div><div class="step-t">Upload CV</div><div class="step-d">PDF or paste text. Education, experience, projects, extracurriculars.</div></div>
+      <div class="step-c"><div class="step-n">02</div><div class="step-t">Get ranked</div><div class="step-d">Placed in a percentile within your cohort. Freshers vs freshers only — never vs executives.</div></div>
+      <div class="step-c"><div class="step-n">03</div><div class="step-t">See your boost tip</div><div class="step-d">One free tip shows your highest-impact move. Upgrade for the full roadmap.</div></div>
+      <div class="step-c"><div class="step-n">04</div><div class="step-t">Apply in one click</div><div class="step-d">Jobs from verified employers. Your scored profile goes straight to hiring teams.</div></div>
+    </div>
+  </div></div>
+  <div class="land-sec"><div class="wrap">
+    <div class="sec-tag">YOUR COHORT</div>
+    <h2 class="sec-h">Ranked against your peers.</h2>
+    <p class="sec-p">A 21-year-old fresher is never compared to a 40-year-old executive. You compete within your own tier.</p>
+    <div class="coh-g">
+      <div class="coh-c"><div class="coh-top"><div><div class="coh-title">Fresher</div><div class="coh-age">AGE up to 22 · 0-2 YRS</div></div><span class="pill pill-au" style="font-size:10px">POOL 1</span></div><div style="font-size:13px;color:var(--t2);font-weight:300;line-height:1.65">Early-career candidates ranked globally. Your academic journey, projects, and initiative matter most here.</div></div>
+      <div class="coh-c"><div class="coh-top"><div><div class="coh-title">Mid-level</div><div class="coh-age">23-35 · 3-7 YRS</div></div><span class="pill pill-bl" style="font-size:10px">POOL 2</span></div><div style="font-size:13px;color:var(--t2);font-weight:300;line-height:1.65">Professionals with track record. Real-world output and impact are front and center.</div></div>
+      <div class="coh-c"><div class="coh-top"><div><div class="coh-title">Senior</div><div class="coh-age">35+ · 8+ YRS</div></div><span class="pill pill-gn" style="font-size:10px">POOL 3</span></div><div style="font-size:13px;color:var(--t2);font-weight:300;line-height:1.65">Leaders and domain experts. Scale of influence, teams led, and industry footprint define your tier.</div></div>
+    </div>
+  </div></div>
+  <div class="land-sec"><div class="wrap">
+    <div class="sec-tag">OUR MODEL</div>
+    <h2 class="sec-h">Trained. Not guessed.</h2>
+    <p class="sec-p">We built something purpose-made for talent — not a generic AI prompt.</p>
+    <div class="model-card"><div class="model-g">
+      <div>
+        <p class="model-p">We generated over 50,000 synthetic CVs per job role, built to represent the full spectrum of candidates competing globally. Our model was trained on this data to understand what genuinely separates candidates at different percentile levels for each specific role.</p>
+        <p class="model-p">The result is a scoring engine that reflects how real hiring works. Your percentile is a calibrated signal, not a guess. Built for global candidates across all geographies.</p>
       </div>
-      <div class="proof-row">
-        <div><div class="proof-n">50k+</div><div class="proof-l">Synthetic CVs trained on</div></div>
-        <div><div class="proof-n">3</div><div class="proof-l">Experience cohorts</div></div>
-        <div><div class="proof-n">Worldwide</div><div class="proof-l">Candidates scored globally</div></div>
-        <div><div class="proof-n">6</div><div class="proof-l">Pipeline stages</div></div>
+      <div>
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--t3);letter-spacing:.12em;margin-bottom:12px">WHAT YOU SEE vs WHAT STAYS PRIVATE</div>
+        <div class="lockbox">
+          <div class="lock-row"><div class="lock-ic lock-pub"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4" stroke="var(--gn)" stroke-width="1.5"/><path d="M4 6l1.5 1.5L8 4.5" stroke="var(--gn)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="lock-lbl">Your percentile score</div><div class="lock-sub">Shown to you before anyone else sees it</div></div></div>
+          <div class="lock-row"><div class="lock-ic lock-pub"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4" stroke="var(--gn)" stroke-width="1.5"/><path d="M4 6l1.5 1.5L8 4.5" stroke="var(--gn)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="lock-lbl">One free boost tip</div><div class="lock-sub">Your highest-impact move to improve rank</div></div></div>
+          <div class="lock-row"><div class="lock-ic lock-prv"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="3" y="5.5" width="6" height="4.5" rx="1" stroke="var(--rd)" stroke-width="1.3"/><path d="M4.5 5.5V4a1.5 1.5 0 013 0v1.5" stroke="var(--rd)" stroke-width="1.3"/></svg></div><div><div class="lock-lbl">Scoring model and algorithm</div><div class="lock-sub">Proprietary</div></div></div>
+          <div class="lock-row"><div class="lock-ic lock-prv"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="3" y="5.5" width="6" height="4.5" rx="1" stroke="var(--rd)" stroke-width="1.3"/><path d="M4.5 5.5V4a1.5 1.5 0 013 0v1.5" stroke="var(--rd)" stroke-width="1.3"/></svg></div><div><div class="lock-lbl">Full boost roadmap</div><div class="lock-sub">Premium plan only</div></div></div>
+          <div class="lock-row"><div class="lock-ic lock-prv"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="3" y="5.5" width="6" height="4.5" rx="1" stroke="var(--rd)" stroke-width="1.3"/><path d="M4.5 5.5V4a1.5 1.5 0 013 0v1.5" stroke="var(--rd)" stroke-width="1.3"/></svg></div><div><div class="lock-lbl">HR filters and screening logic</div><div class="lock-sub">Internal HR tool only</div></div></div>
+        </div>
+      </div>
+    </div></div>
+  </div></div>
+  <div class="land-sec" id="pricing"><div class="wrap">
+    <div class="sec-tag">PLANS</div>
+    <h2 class="sec-h">Invest in your rank.</h2>
+    <p class="sec-p">Your percentile is free. The roadmap to move it is premium.</p>
+    <div class="price-g">
+      <div class="price-c">
+        <div class="price-tier">FREE</div>
+        <div class="price-n">$0<span>/mo</span></div>
+        <div class="price-per">Always free</div>
+        <div class="price-items">
+          <div class="pi"><span class="pi-ok">+</span><span class="pi-t on">Percentile score</span></div>
+          <div class="pi"><span class="pi-ok">+</span><span class="pi-t on">Score breakdown</span></div>
+          <div class="pi"><span class="pi-ok">+</span><span class="pi-t on">1 boost tip</span></div>
+          <div class="pi"><span class="pi-ok">+</span><span class="pi-t on">Browse all open roles</span></div>
+          <div class="pi"><span class="pi-ok">+</span><span class="pi-t on">Application tracker</span></div>
+          <div class="pi"><span class="pi-no">-</span><span class="pi-t">Full boost roadmap</span></div>
+          <div class="pi"><span class="pi-no">-</span><span class="pi-t">CV rewrite suggestions</span></div>
+        </div>
+        <button class="btn btn-ghost" style="width:100%" onclick="goPage('upload')">Get my score</button>
+      </div>
+      <div class="price-c feat">
+        <div class="feat-badge">MOST POPULAR</div>
+        <div class="price-tier">PREMIUM</div>
+        <div class="price-n">$19<span>/mo</span></div>
+        <div class="price-per">Cancel anytime</div>
+        <div class="price-items">
+          <div class="pi"><span class="pi-ok">+</span><span class="pi-t on">Everything in Free</span></div>
+          <div class="pi"><span class="pi-ok">+</span><span class="pi-t on">Full 5-step boost roadmap</span></div>
+          <div class="pi"><span class="pi-ok">+</span><span class="pi-t on">CV rewrite suggestions</span></div>
+          <div class="pi"><span class="pi-ok">+</span><span class="pi-t on">Role-specific CV tailoring</span></div>
+          <div class="pi"><span class="pi-ok">+</span><span class="pi-t on">Unlimited re-scores</span></div>
+        </div>
+        <button class="btn btn-up" style="width:100%">Unlock Premium</button>
+      </div>
+      <div class="price-c">
+        <div class="price-tier">PRO</div>
+        <div class="price-n">$49<span>/mo</span></div>
+        <div class="price-per">For serious candidates</div>
+        <div class="price-items">
+          <div class="pi"><span class="pi-ok">+</span><span class="pi-t on">Everything in Premium</span></div>
+          <div class="pi"><span class="pi-ok">+</span><span class="pi-t on">Priority apply</span></div>
+          <div class="pi"><span class="pi-ok">+</span><span class="pi-t on">Recruiter visibility badge</span></div>
+          <div class="pi"><span class="pi-ok">+</span><span class="pi-t on">Interview prep by role</span></div>
+          <div class="pi"><span class="pi-ok">+</span><span class="pi-t on">Referral network access</span></div>
+        </div>
+        <button class="btn btn-au" style="width:100%">Get Pro</button>
       </div>
     </div>
-  </div>
-
-  <div class="land-sec">
-    <div class="wrap">
-      <div class="sec-tag">HOW IT WORKS</div>
-      <h2 class="sec-h">Four steps to your rank.</h2>
-      <p class="sec-p">Upload your CV and get your global talent percentile — honest, cohort-relative, role-specific.</p>
-      <div class="steps-g">
-        <div class="step-c" data-n="1"><div class="step-n">01 —</div><div class="step-t">Upload CV</div><div class="step-d">PDF or paste text. Education, experience, projects, extracurriculars.</div></div>
-        <div class="step-c" data-n="2"><div class="step-n">02 —</div><div class="step-t">Get ranked</div><div class="step-d">Placed in a percentile within your cohort. Freshers compete with freshers — never with executives.</div></div>
-        <div class="step-c" data-n="3"><div class="step-n">03 —</div><div class="step-t">See your boost tip</div><div class="step-d">One free tip shows your highest-impact move. Upgrade for the full roadmap.</div></div>
-        <div class="step-c" data-n="4"><div class="step-n">04 —</div><div class="step-t">Apply in one click</div><div class="step-d">Jobs from verified employers. Your scored profile goes straight to hiring teams.</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="land-sec">
-    <div class="wrap">
-      <div class="sec-tag">YOUR COHORT</div>
-      <h2 class="sec-h">Ranked against your peers.</h2>
-      <p class="sec-p">A 21-year-old fresher is never compared to a 40-year-old executive. You compete within your own tier.</p>
-      <div class="cohort-g">
-        <div class="coh-c">
-          <div class="coh-top"><div><div class="coh-title">Fresher</div><div class="coh-age">AGE ≤ 22 · 0–2 YRS</div></div><span class="pill pill-au" style="font-size:10px">POOL 1</span></div>
-          <div style="font-size:13px;color:var(--t2);font-weight:300;line-height:1.65">Early-career candidates ranked globally. Your academic journey, projects, and initiative matter most here.</div>
-        </div>
-        <div class="coh-c">
-          <div class="coh-top"><div><div class="coh-title">Mid-level</div><div class="coh-age">23–35 · 3–7 YRS</div></div><span class="pill pill-bl" style="font-size:10px">POOL 2</span></div>
-          <div style="font-size:13px;color:var(--t2);font-weight:300;line-height:1.65">Professionals with track record. Real-world output and impact are front and center.</div>
-        </div>
-        <div class="coh-c">
-          <div class="coh-top"><div><div class="coh-title">Senior</div><div class="coh-age">35+ · 8+ YRS</div></div><span class="pill pill-gn" style="font-size:10px">POOL 3</span></div>
-          <div style="font-size:13px;color:var(--t2);font-weight:300;line-height:1.65">Leaders and domain experts. Scale of influence, teams led, and industry footprint define your tier.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="land-sec">
-    <div class="wrap">
-      <div class="sec-tag">OUR MODEL</div>
-      <h2 class="sec-h">Trained. Not guessed.</h2>
-      <p class="sec-p">We built something purpose-made for talent — not a generic AI prompt.</p>
-      <div class="model-card">
-        <div class="model-g">
-          <div>
-            <p class="model-p">We generated over 50,000 synthetic CVs per job role, built to represent the full spectrum of candidates competing for each position globally. Our model was trained on this data to understand what genuinely separates candidates at different percentile levels.</p>
-            <p class="model-p">The result is a scoring engine that reflects how real hiring works — not a generic checklist. Your percentile is a calibrated signal, not a guess. Built for global candidates across all geographies.</p>
-          </div>
-          <div>
-            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--t3);letter-spacing:.12em;margin-bottom:12px">WHAT YOU SEE vs WHAT STAYS PRIVATE</div>
-            <div class="lockbox">
-              <div class="lock-row"><div class="lock-ic lock-pub"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4" stroke="var(--gn)" stroke-width="1.5"/><path d="M4 6l1.5 1.5L8 4.5" stroke="var(--gn)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="lock-lbl">Your percentile score</div><div class="lock-sub">Shown to you before anyone else sees it</div></div></div>
-              <div class="lock-row"><div class="lock-ic lock-pub"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4" stroke="var(--gn)" stroke-width="1.5"/><path d="M4 6l1.5 1.5L8 4.5" stroke="var(--gn)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="lock-lbl">One free boost tip</div><div class="lock-sub">Your highest-impact move to improve rank</div></div></div>
-              <div class="lock-row"><div class="lock-ic lock-prv"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="3" y="5.5" width="6" height="4.5" rx="1" stroke="var(--rd)" stroke-width="1.3"/><path d="M4.5 5.5V4a1.5 1.5 0 013 0v1.5" stroke="var(--rd)" stroke-width="1.3"/></svg></div><div><div class="lock-lbl">Scoring model and algorithm</div><div class="lock-sub">Proprietary — not shown to anyone</div></div></div>
-              <div class="lock-row"><div class="lock-ic lock-prv"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="3" y="5.5" width="6" height="4.5" rx="1" stroke="var(--rd)" stroke-width="1.3"/><path d="M4.5 5.5V4a1.5 1.5 0 013 0v1.5" stroke="var(--rd)" stroke-width="1.3"/></svg></div><div><div class="lock-lbl">Full boost roadmap</div><div class="lock-sub">Premium — unlock with paid plan</div></div></div>
-              <div class="lock-row"><div class="lock-ic lock-prv"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="3" y="5.5" width="6" height="4.5" rx="1" stroke="var(--rd)" stroke-width="1.3"/><path d="M4.5 5.5V4a1.5 1.5 0 013 0v1.5" stroke="var(--rd)" stroke-width="1.3"/></svg></div><div><div class="lock-lbl">HR filters and screening logic</div><div class="lock-sub">Internal HR tool — never student-facing</div></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="land-sec" id="pricing">
-    <div class="wrap">
-      <div class="sec-tag">PLANS</div>
-      <h2 class="sec-h">Invest in your rank.</h2>
-      <p class="sec-p">Your percentile is free. The roadmap to move it is premium.</p>
-      <div class="price-g">
-        <div class="price-c">
-          <div class="price-tier">FREE</div>
-          <div class="price-n">$0<span>/mo</span></div>
-          <div class="price-per">Always free</div>
-          <div class="price-items">
-            <div class="pi"><span class="pi-ok">✓</span><span class="pi-t on">Percentile score</span></div>
-            <div class="pi"><span class="pi-ok">✓</span><span class="pi-t on">Score breakdown</span></div>
-            <div class="pi"><span class="pi-ok">✓</span><span class="pi-t on">1 boost tip</span></div>
-            <div class="pi"><span class="pi-ok">✓</span><span class="pi-t on">Browse all open roles</span></div>
-            <div class="pi"><span class="pi-ok">✓</span><span class="pi-t on">Application tracker</span></div>
-            <div class="pi"><span class="pi-no">–</span><span class="pi-t">Full boost roadmap</span></div>
-            <div class="pi"><span class="pi-no">–</span><span class="pi-t">CV rewrite suggestions</span></div>
-          </div>
-          <button class="btn btn-ghost" style="width:100%" onclick="goPage('upload')">Get my score →</button>
-        </div>
-        <div class="price-c feat">
-          <div class="feat-badge">✦ MOST POPULAR</div>
-          <div class="price-tier">PREMIUM</div>
-          <div class="price-n">$19<span>/mo</span></div>
-          <div class="price-per">Cancel anytime</div>
-          <div class="price-items">
-            <div class="pi"><span class="pi-ok">✓</span><span class="pi-t on">Everything in Free</span></div>
-            <div class="pi"><span class="pi-ok">✓</span><span class="pi-t on">Full 5-step boost roadmap</span></div>
-            <div class="pi"><span class="pi-ok">✓</span><span class="pi-t on">CV rewrite suggestions</span></div>
-            <div class="pi"><span class="pi-ok">✓</span><span class="pi-t on">Role-specific CV tailoring</span></div>
-            <div class="pi"><span class="pi-ok">✓</span><span class="pi-t on">Unlimited re-scores</span></div>
-          </div>
-          <button class="btn btn-up" style="width:100%">Unlock Premium ✦</button>
-        </div>
-        <div class="price-c">
-          <div class="price-tier">PRO</div>
-          <div class="price-n">$49<span>/mo</span></div>
-          <div class="price-per">For serious candidates</div>
-          <div class="price-items">
-            <div class="pi"><span class="pi-ok">✓</span><span class="pi-t on">Everything in Premium</span></div>
-            <div class="pi"><span class="pi-ok">✓</span><span class="pi-t on">Priority apply — top of HR queue</span></div>
-            <div class="pi"><span class="pi-ok">✓</span><span class="pi-t on">Recruiter visibility badge</span></div>
-            <div class="pi"><span class="pi-ok">✓</span><span class="pi-t on">Interview prep by role</span></div>
-            <div class="pi"><span class="pi-ok">✓</span><span class="pi-t on">Direct referral network access</span></div>
-          </div>
-          <button class="btn btn-au" style="width:100%">Get Pro →</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <footer><div class="wrap">Built for the world · <b>apex.</b> · Jobs posted by verified employers only</div></footer>
+  </div></div>
+  <footer><div class="wrap">Built for the world &middot; <b>apex.</b> &middot; Jobs posted by verified employers only</div></footer>
 </div>
-
-<!-- ══════════ UPLOAD ══════════ -->
+<!-- UPLOAD -->
 <div id="page-upload" class="page">
 <div class="up-page"><div class="wrap">
   <div id="form-view">
@@ -402,13 +335,13 @@ footer b{color:var(--au);font-weight:400}
             <input type="file" id="cv-file" accept=".pdf,.txt,.doc,.docx" onchange="onFile(this)">
             <div class="dz-ic"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2v10M6 5l3-3 3 3M2 13v3h14v-3" stroke="var(--au)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             <div class="dz-t">Drop your CV here</div>
-            <div class="dz-s">PDF, TXT, DOC — or click to browse</div>
+            <div class="dz-s">PDF, TXT, DOC or click to browse</div>
             <div class="dz-name" id="dz-name"></div>
           </div>
           <div class="divider"><span>OR PASTE BELOW</span></div>
           <div class="frow">
             <label class="lbl">Resume text</label>
-            <textarea class="inp" id="cv-text" rows="13" placeholder="Paste your full CV here — education, experience, projects, extracurriculars, skills, awards..."></textarea>
+            <textarea class="inp" id="cv-text" rows="13" placeholder="Paste your full CV here including education, experience, projects, skills and awards"></textarea>
           </div>
         </div>
       </div>
@@ -420,21 +353,21 @@ footer b{color:var(--au);font-weight:400}
             <div class="frow"><label class="lbl">First name</label><input type="text" class="inp" id="s-fn" placeholder="Alex"></div>
             <div class="frow"><label class="lbl">Last name</label><input type="text" class="inp" id="s-ln" placeholder="Chen"></div>
           </div>
-          <div class="frow"><label class="lbl">Email</label><input type="email" class="inp" id="s-em" placeholder="alex@university.edu"></div>
+          <div class="frow"><label class="lbl">Email</label><input type="email" class="inp" id="s-em" placeholder="you@university.edu"></div>
           <div class="frow"><label class="lbl">Age</label><input type="number" class="inp" id="s-age" placeholder="21" min="16" max="70" oninput="autoCohort(this.value)"></div>
           <div class="frow">
-            <label class="lbl" style="margin-bottom:8px">Cohort — auto-selected by age</label>
+            <label class="lbl" style="margin-bottom:8px">Cohort (auto-set by age)</label>
             <div class="co-pick">
-              <div class="co-opt sel" id="co-fresher" onclick="setCohort('fresher')"><div class="co-t">Fresher</div><div class="co-d">≤22 · 0–2yr</div></div>
-              <div class="co-opt" id="co-mid" onclick="setCohort('mid')"><div class="co-t">Mid</div><div class="co-d">23–35 · 3–7yr</div></div>
-              <div class="co-opt" id="co-senior" onclick="setCohort('senior')"><div class="co-t">Senior</div><div class="co-d">35+ · 8+yr</div></div>
+              <div class="co-opt sel" id="co-fresher" onclick="setCohort('fresher')"><div class="co-t">Fresher</div><div class="co-d">up to 22</div></div>
+              <div class="co-opt" id="co-mid" onclick="setCohort('mid')"><div class="co-t">Mid</div><div class="co-d">23-35</div></div>
+              <div class="co-opt" id="co-senior" onclick="setCohort('senior')"><div class="co-t">Senior</div><div class="co-d">35+</div></div>
             </div>
           </div>
           <div class="frow">
             <label class="lbl">Target role</label>
             <select class="inp" id="s-role">
               <option value="">Select your target role...</option>
-              <optgroup label="Finance &amp; Quant">
+              <optgroup label="Finance">
                 <option>Quantitative Analyst</option>
                 <option>Investment Banking Analyst</option>
                 <option>Venture Capital Analyst</option>
@@ -447,9 +380,9 @@ footer b{color:var(--au);font-weight:400}
                 <option>Data Scientist</option>
                 <option>Product Manager</option>
                 <option>UX Designer</option>
-                <option>DevOps / Platform Engineer</option>
+                <option>DevOps Engineer</option>
               </optgroup>
-              <optgroup label="Consulting &amp; Strategy">
+              <optgroup label="Consulting">
                 <option>Management Consultant</option>
                 <option>Strategy Analyst</option>
               </optgroup>
@@ -461,7 +394,7 @@ footer b{color:var(--au);font-weight:400}
             </select>
           </div>
           <div class="frow">
-            <label class="lbl">Work authorization (US roles)</label>
+            <label class="lbl">Work authorization</label>
             <select class="inp" id="s-intl">
               <option value="no">US Citizen / Green Card</option>
               <option value="yes">Requires visa sponsorship</option>
@@ -469,10 +402,8 @@ footer b{color:var(--au);font-weight:400}
             </select>
           </div>
           <div id="up-err" class="alert alert-err"></div>
-          <button class="btn btn-au" style="width:100%" onclick="startScore()">Score my profile →</button>
-          <div style="margin-top:12px;padding:9px 12px;background:var(--s2);border-radius:8px;border:1px solid var(--b1);font-size:11px;color:var(--t3);line-height:1.6">
-            Your score is shown to you before any employer sees it. HR sees your percentile only — never the full analysis. Your CV is never shared without an explicit apply action.
-          </div>
+          <button class="btn btn-au" style="width:100%" onclick="startScore()">Score my profile</button>
+          <div style="margin-top:12px;padding:9px 12px;background:var(--s2);border-radius:8px;font-size:11px;color:var(--t3);line-height:1.6">Your score is shown to you before any employer sees it. HR sees your percentile only. Your CV is never shared without an explicit apply action.</div>
         </div>
       </div>
     </div>
@@ -487,8 +418,7 @@ footer b{color:var(--au);font-weight:400}
   </div>
 </div></div>
 </div>
-
-<!-- ══════════ RESULT ══════════ -->
+<!-- RESULT -->
 <div id="page-result" class="page">
 <div class="res-page"><div class="wrap">
   <div class="flex jb aic mb3" style="flex-wrap:wrap;gap:10px">
@@ -497,9 +427,9 @@ footer b{color:var(--au);font-weight:400}
       <h1 style="font-size:26px;font-weight:700;letter-spacing:-.4px" id="r-name">Score</h1>
     </div>
     <div class="flex gap8" style="flex-wrap:wrap">
-      <button class="btn btn-ghost btn-sm" onclick="resetUpload()">← Re-analyze</button>
-      <button class="btn btn-up btn-sm" onclick="goSection('pricing')">Unlock full roadmap ✦</button>
-      <button class="btn btn-au btn-sm" onclick="goPage('track')">Track applications →</button>
+      <button class="btn btn-ghost btn-sm" onclick="resetUpload()">Re-analyze</button>
+      <button class="btn btn-up btn-sm" onclick="goSection('pricing')">Unlock full roadmap</button>
+      <button class="btn btn-au btn-sm" onclick="goPage('track')">Track applications</button>
     </div>
   </div>
   <div class="res-hero mb2">
@@ -519,8 +449,8 @@ footer b{color:var(--au);font-weight:400}
       <div class="res-q" id="r-sum"></div>
       <div class="res-badges">
         <span id="b-cohort" class="pill pill-au" style="font-size:10px"></span>
-        <span id="b-role"   class="pill pill-gray" style="font-size:10px"></span>
-        <span id="b-intl"   class="pill pill-bl hidden" style="font-size:10px">Visa sponsorship needed</span>
+        <span id="b-role" class="pill pill-gray" style="font-size:10px"></span>
+        <span id="b-intl" class="pill pill-bl hidden" style="font-size:10px">Visa sponsorship needed</span>
       </div>
     </div>
   </div>
@@ -541,30 +471,29 @@ footer b{color:var(--au);font-weight:400}
     </div>
   </div>
   <div class="free-boost mb2">
-    <div class="fb-h">★ Top tip to boost your percentile (free)</div>
+    <div class="fb-h">Top tip to boost your percentile (free)</div>
     <div class="fb-row">
-      <span class="fb-arr">↑</span>
-      <div class="fb-text" id="free-tip"></div>
+      <span class="fb-arr">up</span>
+      <div class="fb-text" id="free-tip">Analyzing...</div>
       <span class="fb-gain" id="free-gain"></span>
     </div>
   </div>
   <div class="paywall mb2">
-    <div class="pw-lock"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="4" y="8" width="10" height="8" rx="1.5" stroke="#A78BFA" stroke-width="1.5"/><path d="M6.5 8V6a2.5 2.5 0 015 0v2" stroke="#A78BFA" stroke-width="1.5"/></svg></div>
     <div class="pw-t">Unlock your full percentile roadmap</div>
-    <div class="pw-p">5 specific sequenced actions tailored to your profile and target role — with estimated percentile gains per step. Plus CV rewrite suggestions.</div>
+    <div class="pw-p">5 specific sequenced actions with estimated percentile gains per step. Plus CV rewrite suggestions and role-specific tailoring.</div>
     <div class="pw-list">
-      <div class="pw-item"><span style="color:var(--pu)">✦</span>Full 5-step boost plan</div>
-      <div class="pw-item"><span style="color:var(--pu)">✦</span>CV rewrite by section</div>
-      <div class="pw-item"><span style="color:var(--pu)">✦</span>Role-specific tailoring</div>
-      <div class="pw-item"><span style="color:var(--pu)">✦</span>Unlimited re-scores</div>
+      <div class="pw-item">Full 5-step boost plan</div>
+      <div class="pw-item">CV rewrite by section</div>
+      <div class="pw-item">Role-specific tailoring</div>
+      <div class="pw-item">Unlimited re-scores</div>
     </div>
-    <button class="btn btn-up" onclick="goSection('pricing')">Unlock Premium — $19/mo ✦</button>
+    <button class="btn btn-up" onclick="goSection('pricing')">Unlock Premium - $19/mo</button>
   </div>
   <div class="card">
     <div class="flex jb aic mb2" style="flex-wrap:wrap;gap:10px">
       <div>
         <div style="font-size:16px;font-weight:700;margin-bottom:3px">Open roles</div>
-        <div style="font-size:13px;color:var(--t2);font-weight:300">Jobs from verified employers — <span id="r-jcount">0</span> available</div>
+        <div style="font-size:13px;color:var(--t2);font-weight:300">Jobs from verified employers - <span id="r-jcount">0</span> available</div>
       </div>
       <div class="jf-row" style="margin-bottom:0">
         <button class="jf on" onclick="filterJobs('all',this)">All</button>
@@ -580,17 +509,16 @@ footer b{color:var(--au);font-weight:400}
         <div style="font-size:15px;font-weight:700;margin-bottom:4px">Apply to all matched roles</div>
         <div style="font-size:13px;color:var(--t2);font-weight:300">Your scored profile goes directly to hiring teams.</div>
       </div>
-      <button class="btn btn-au" id="apply-all-btn" onclick="applyAll(this)">One-click apply →</button>
+      <button class="btn btn-au" id="apply-all-btn" onclick="applyAll(this)">One-click apply</button>
     </div>
   </div>
 </div></div>
 </div>
-
-<!-- ══════════ JOBS ══════════ -->
+<!-- JOBS -->
 <div id="page-jobs" class="page">
 <div style="padding:2.5rem 0"><div class="wrap">
   <h1 style="font-size:28px;font-weight:700;letter-spacing:-.5px;margin-bottom:6px">Open roles</h1>
-  <p style="font-size:14px;color:var(--t2);font-weight:300;margin-bottom:1.5rem">All positions from verified employers. <a href="#" onclick="goPage('upload');return false" style="color:var(--au);text-decoration:none">Get your score →</a> to see your match tier.</p>
+  <p style="font-size:14px;color:var(--t2);font-weight:300;margin-bottom:1.5rem">All positions from verified employers. <a href="#" onclick="goPage('upload');return false" style="color:var(--au);text-decoration:none">Get your score</a> to see your match tier.</p>
   <div class="jf-row mb2">
     <button class="jf on" onclick="filterBrowse('all',this)">All roles</button>
     <button class="jf" onclick="filterBrowse('fresher',this)">Fresher</button>
@@ -601,89 +529,30 @@ footer b{color:var(--au);font-weight:400}
   <div class="card"><div id="browse-job-list"></div></div>
 </div></div>
 </div>
-
-<!-- ══════════ TRACK ══════════ -->
+<!-- TRACK -->
 <div id="page-track" class="page">
 <div class="track-page"><div class="wrap">
   <h1 style="font-size:28px;font-weight:700;letter-spacing:-.5px;margin-bottom:6px">My applications</h1>
   <p style="font-size:14px;color:var(--t2);font-weight:300;margin-bottom:2rem">Live pipeline status across every role you applied to.</p>
   <div class="card" style="max-width:460px;margin-bottom:1.5rem">
     <div style="font-size:15px;font-weight:700;margin-bottom:4px">Look up your applications</div>
-    <div style="font-size:13px;color:var(--t2);font-weight:300;margin-bottom:1rem">Enter the email you applied with. Try <code style="color:var(--au);background:var(--auf);padding:1px 6px;border-radius:4px;font-size:12px"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b4d0d1d9dbf4d5c4d1cc9ad7db">[email&#160;protected]</a></code> for a sample.</div>
+    <div style="font-size:13px;color:var(--t2);font-weight:300;margin-bottom:1rem">Enter the email you applied with. Try demo@apex.co for a sample.</div>
     <div class="frow"><label class="lbl">Email address</label><input type="email" class="inp" id="t-em" placeholder="you@email.com" onkeydown="if(event.key==='Enter')doTrack()"></div>
-    <button class="btn btn-au" onclick="doTrack()">Look up →</button>
+    <button class="btn btn-au" onclick="doTrack()">Look up</button>
   </div>
   <div id="track-res"></div>
 </div></div>
 </div>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// ═══ DATA ═══
-const STAGES = ['Applied','Screening','Round 1','Round 2','Offer','Onboarding'];
-
-const COHORTS = {
-  fresher:{
-    badge:'FRESHER POOL', pill:'pill-au',
-    keys:['projects_score','education_score','extra_score'],
-    labels:['Projects & Internships','Education & Grades','Extracurriculars'],
-    weights:[40,30,30], colors:['var(--au)','var(--pu)','var(--bl)'],
-    prompt:'FRESHER COHORT (age under 22, 0-2yrs exp). Score based on internship prestige globally, academic institution quality globally, and extracurriculars like olympiads, hackathons, research, startups.'
-  },
-  mid:{
-    badge:'MID-LEVEL POOL', pill:'pill-bl',
-    keys:['experience_score','education_score','other_score'],
-    labels:['Job Experience & Output','Education','Skills & Certifications'],
-    weights:[60,20,20], colors:['var(--bl)','var(--pu)','var(--t2)'],
-    prompt:'MID-LEVEL COHORT (23-35, 3-7yrs exp). Score primarily on job experience, quantified impact, company prestige, promotions, team leadership.'
-  },
-  senior:{
-    badge:'SENIOR POOL', pill:'pill-gn',
-    keys:['experience_score','education_score','other_score'],
-    labels:['Leadership & Impact','Education','Patents & Advisory'],
-    weights:[60,20,20], colors:['var(--gn)','var(--pu)','var(--t2)'],
-    prompt:'SENIOR COHORT (35+, 8+yrs exp). Score on org size led, P&L ownership, M&A, board roles, global recognition, patents, publications.'
-  }
-};
-
-const JOBS = [
-  {id:1,  co:'Jane Street',      logo:'JS', role:'Quantitative Analyst',        loc:'New York, USA',       pay:'$250k+',      tier:'Top 0.1%', cohort:'fresher', sponsored:false},
-  {id:2,  co:'Citadel',          logo:'CT', role:'Quantitative Researcher',      loc:'Chicago, USA',        pay:'$220-260k',   tier:'Top 0.5%', cohort:'fresher', sponsored:true},
-  {id:3,  co:'D.E. Shaw',        logo:'DE', role:'Quantitative Analyst',         loc:'New York, USA',       pay:'$200-250k',   tier:'Top 1%',   cohort:'fresher', sponsored:false},
-  {id:4,  co:'OpenAI',           logo:'OA', role:'ML Research Engineer',         loc:'San Francisco, USA',  pay:'$200-260k',   tier:'Top 3%',   cohort:'fresher', sponsored:true},
-  {id:5,  co:'Google DeepMind',  logo:'GD', role:'Research Engineer',            loc:'London, UK',          pay:'120-160k GBP',tier:'Top 5%',   cohort:'fresher', sponsored:true},
-  {id:6,  co:'Goldman Sachs',    logo:'GS', role:'Investment Banking Analyst',   loc:'New York, USA',       pay:'$110-130k',   tier:'Top 5%',   cohort:'fresher', sponsored:false},
-  {id:7,  co:'McKinsey',         logo:'MC', role:'Business Analyst',             loc:'Multiple locations',  pay:'$130-165k',   tier:'Top 5%',   cohort:'fresher', sponsored:true},
-  {id:8,  co:'Palantir',         logo:'PL', role:'Forward Deployed Engineer',    loc:'New York, USA',       pay:'$140-180k',   tier:'Top 8%',   cohort:'fresher', sponsored:true},
-  {id:9,  co:'Morgan Stanley',   logo:'MS', role:'Technology Analyst',           loc:'New York, USA',       pay:'$100-125k',   tier:'Top 12%',  cohort:'fresher', sponsored:true},
-  {id:10, co:'Bain',             logo:'BC', role:'Associate Consultant',         loc:'Boston, USA',         pay:'$105-130k',   tier:'Top 10%',  cohort:'fresher', sponsored:false},
-  {id:11, co:'Two Sigma',        logo:'2S', role:'Senior Data Scientist',        loc:'New York, USA',       pay:'$250-320k',   tier:'Top 3%',   cohort:'mid',     sponsored:true},
-  {id:12, co:'Stripe',           logo:'SP', role:'Product Manager',              loc:'San Francisco, USA',  pay:'$200-250k',   tier:'Top 8%',   cohort:'mid',     sponsored:true},
-  {id:13, co:'Airbnb',           logo:'AB', role:'Senior PM',                    loc:'San Francisco, USA',  pay:'$210-260k',   tier:'Top 10%',  cohort:'mid',     sponsored:true},
-  {id:14, co:'McKinsey',         logo:'MC', role:'Engagement Manager',           loc:'Multiple locations',  pay:'$200-280k',   tier:'Top 5%',   cohort:'mid',     sponsored:false},
-  {id:15, co:'Google',           logo:'GG', role:'Senior Software Engineer L5',  loc:'Multiple locations',  pay:'$260-340k',   tier:'Top 10%',  cohort:'mid',     sponsored:true},
-  {id:16, co:'Citadel',          logo:'CT', role:'Portfolio Manager',            loc:'Chicago, USA',        pay:'$400k+',      tier:'Top 2%',   cohort:'mid',     sponsored:false},
-  {id:17, co:'Sequoia Capital',  logo:'SQ', role:'Principal',                    loc:'Menlo Park, USA',     pay:'$250-400k',   tier:'Top 3%',   cohort:'mid',     sponsored:false},
-  {id:18, co:'JPMorgan',         logo:'JP', role:'Vice President',               loc:'New York, USA',       pay:'$180-250k',   tier:'Top 15%',  cohort:'mid',     sponsored:false},
-  {id:19, co:'Deutsche Bank',    logo:'DB', role:'Director',                     loc:'Frankfurt, Germany',  pay:'180-240k EUR',tier:'Top 12%',  cohort:'mid',     sponsored:true},
-  {id:20, co:'Blackstone',       logo:'BX', role:'Managing Director',            loc:'New York, USA',       pay:'$500k-$2M+',  tier:'Top 2%',   cohort:'senior',  sponsored:false},
-  {id:21, co:'Google',           logo:'GG', role:'Engineering Director L8',      loc:'Multiple locations',  pay:'$550k-$900k', tier:'Top 3%',   cohort:'senior',  sponsored:true},
-  {id:22, co:'Goldman Sachs',    logo:'GS', role:'Managing Director',            loc:'New York, USA',       pay:'$500k-$1.5M', tier:'Top 3%',   cohort:'senior',  sponsored:false},
-  {id:23, co:'McKinsey',         logo:'MC', role:'Senior Partner',               loc:'Multiple locations',  pay:'$600k-$2M+',  tier:'Top 2%',   cohort:'senior',  sponsored:false},
-  {id:24, co:'Meta',             logo:'MT', role:'VP of Engineering',            loc:'Menlo Park, USA',     pay:'$700k-$1.2M', tier:'Top 3%',   cohort:'senior',  sponsored:true},
-  {id:25, co:'JPMorgan',         logo:'JP', role:'Executive Director',           loc:'New York, USA',       pay:'$350k-$700k', tier:'Top 8%',   cohort:'senior',  sponsored:false},
-  {id:26, co:'Macquarie',        logo:'MQ', role:'Managing Director',            loc:'Sydney, Australia',   pay:'AUD $500k+',  tier:'Top 5%',   cohort:'senior',  sponsored:false}
+<script>
+var STAGES = ['Applied','Screening','Round 1','Round 2','Offer','Onboarding'];
+var cohort = 'fresher';
+var cvRaw  = '';
+var rEmail = '';
+var apps = [
+  {email:'demo@apex.co',company:'Jane Street',role:'Quantitative Analyst',stage:'Round 1',cohort:'fresher',percentile:99.1,summary:'Elite quant profile.'},
+  {email:'demo@apex.co',company:'McKinsey',role:'Business Analyst',stage:'Screening',cohort:'fresher',percentile:99.1,summary:'Strong academic pedigree aligns well with McKinsey analyst criteria.'}
 ];
-
-// ═══ STATE ═══
-let cohort = 'fresher';
-let cvRaw  = '';
-let rEmail = '';
-let apps   = [
-  {email:'demo@apex.co', company:'Jane Street',  role:'Quantitative Analyst', stage:'Round 1',  cohort:'fresher', percentile:99.1, summary:'Elite quant profile — top school plus top-tier internship is exactly what prop shops seek.'},
-  {email:'demo@apex.co', company:'McKinsey',     role:'Business Analyst',     stage:'Screening',cohort:'fresher', percentile:99.1, summary:'Strong academic pedigree aligns well with McKinsey analyst criteria.'}
-];
-
-const MSGS = [
+var MSGS = [
   ['Parsing your CV...','Reading education, experience, projects'],
   ['Pooling your cohort...','Comparing against your peer group'],
   ['Applying global calibration...','Scoring against trained model'],
@@ -691,89 +560,109 @@ const MSGS = [
   ['Calculating percentile...','Benchmarking against 50,000+ profiles'],
   ['Generating your tip...','Finding your top opportunity']
 ];
+var COHORTS = {
+  fresher:{badge:'FRESHER POOL',pill:'pill-au',keys:['projects_score','education_score','extra_score'],labels:['Projects & Internships','Education & Grades','Extracurriculars'],weights:[40,30,30],colors:['var(--au)','var(--pu)','var(--bl)'],prompt:'FRESHER COHORT (age under 22, 0-2yrs). Score on internship prestige globally, academic quality globally, and extracurriculars like olympiads hackathons research startups.'},
+  mid:{badge:'MID-LEVEL POOL',pill:'pill-bl',keys:['experience_score','education_score','other_score'],labels:['Job Experience & Output','Education','Skills & Certs'],weights:[60,20,20],colors:['var(--bl)','var(--pu)','var(--t2)'],prompt:'MID-LEVEL COHORT (23-35, 3-7yrs). Score primarily on job experience quantified impact company prestige promotions team leadership.'},
+  senior:{badge:'SENIOR POOL',pill:'pill-gn',keys:['experience_score','education_score','other_score'],labels:['Leadership & Impact','Education','Patents & Advisory'],weights:[60,20,20],colors:['var(--gn)','var(--pu)','var(--t2)'],prompt:'SENIOR COHORT (35+, 8+yrs). Score on org size led P&L ownership M&A board roles global recognition patents publications.'}
+};
+var JOBS = [
+  {id:1,co:'Jane Street',logo:'JS',role:'Quantitative Analyst',loc:'New York, USA',pay:'$250k+',tier:'Top 0.1%',cohort:'fresher',sponsored:false},
+  {id:2,co:'Citadel',logo:'CT',role:'Quantitative Researcher',loc:'Chicago, USA',pay:'$220-260k',tier:'Top 0.5%',cohort:'fresher',sponsored:true},
+  {id:3,co:'D.E. Shaw',logo:'DE',role:'Quantitative Analyst',loc:'New York, USA',pay:'$200-250k',tier:'Top 1%',cohort:'fresher',sponsored:false},
+  {id:4,co:'OpenAI',logo:'OA',role:'ML Research Engineer',loc:'San Francisco, USA',pay:'$200-260k',tier:'Top 3%',cohort:'fresher',sponsored:true},
+  {id:5,co:'Google DeepMind',logo:'GD',role:'Research Engineer',loc:'London, UK',pay:'120-160k GBP',tier:'Top 5%',cohort:'fresher',sponsored:true},
+  {id:6,co:'Goldman Sachs',logo:'GS',role:'Investment Banking Analyst',loc:'New York, USA',pay:'$110-130k',tier:'Top 5%',cohort:'fresher',sponsored:false},
+  {id:7,co:'McKinsey',logo:'MC',role:'Business Analyst',loc:'Multiple locations',pay:'$130-165k',tier:'Top 5%',cohort:'fresher',sponsored:true},
+  {id:8,co:'Palantir',logo:'PL',role:'Forward Deployed Engineer',loc:'New York, USA',pay:'$140-180k',tier:'Top 8%',cohort:'fresher',sponsored:true},
+  {id:9,co:'Morgan Stanley',logo:'MS',role:'Technology Analyst',loc:'New York, USA',pay:'$100-125k',tier:'Top 12%',cohort:'fresher',sponsored:true},
+  {id:10,co:'Bain',logo:'BC',role:'Associate Consultant',loc:'Boston, USA',pay:'$105-130k',tier:'Top 10%',cohort:'fresher',sponsored:false},
+  {id:11,co:'Two Sigma',logo:'2S',role:'Senior Data Scientist',loc:'New York, USA',pay:'$250-320k',tier:'Top 3%',cohort:'mid',sponsored:true},
+  {id:12,co:'Stripe',logo:'SP',role:'Product Manager',loc:'San Francisco, USA',pay:'$200-250k',tier:'Top 8%',cohort:'mid',sponsored:true},
+  {id:13,co:'Airbnb',logo:'AB',role:'Senior PM',loc:'San Francisco, USA',pay:'$210-260k',tier:'Top 10%',cohort:'mid',sponsored:true},
+  {id:14,co:'McKinsey',logo:'MC',role:'Engagement Manager',loc:'Multiple locations',pay:'$200-280k',tier:'Top 5%',cohort:'mid',sponsored:false},
+  {id:15,co:'Google',logo:'GG',role:'Senior Software Engineer',loc:'Multiple locations',pay:'$260-340k',tier:'Top 10%',cohort:'mid',sponsored:true},
+  {id:16,co:'Citadel',logo:'CT',role:'Portfolio Manager',loc:'Chicago, USA',pay:'$400k+',tier:'Top 2%',cohort:'mid',sponsored:false},
+  {id:17,co:'Sequoia Capital',logo:'SQ',role:'Principal',loc:'Menlo Park, USA',pay:'$250-400k',tier:'Top 3%',cohort:'mid',sponsored:false},
+  {id:18,co:'JPMorgan',logo:'JP',role:'Vice President',loc:'New York, USA',pay:'$180-250k',tier:'Top 15%',cohort:'mid',sponsored:false},
+  {id:19,co:'Deutsche Bank',logo:'DB',role:'Director',loc:'Frankfurt, Germany',pay:'180-240k EUR',tier:'Top 12%',cohort:'mid',sponsored:true},
+  {id:20,co:'Blackstone',logo:'BX',role:'Managing Director',loc:'New York, USA',pay:'$500k-$2M+',tier:'Top 2%',cohort:'senior',sponsored:false},
+  {id:21,co:'Google',logo:'GG',role:'Engineering Director',loc:'Multiple locations',pay:'$550k-$900k',tier:'Top 3%',cohort:'senior',sponsored:true},
+  {id:22,co:'Goldman Sachs',logo:'GS',role:'Managing Director',loc:'New York, USA',pay:'$500k-$1.5M',tier:'Top 3%',cohort:'senior',sponsored:false},
+  {id:23,co:'McKinsey',logo:'MC',role:'Senior Partner',loc:'Multiple locations',pay:'$600k-$2M+',tier:'Top 2%',cohort:'senior',sponsored:false},
+  {id:24,co:'Meta',logo:'MT',role:'VP of Engineering',loc:'Menlo Park, USA',pay:'$700k-$1.2M',tier:'Top 3%',cohort:'senior',sponsored:true},
+  {id:25,co:'JPMorgan',logo:'JP',role:'Executive Director',loc:'New York, USA',pay:'$350k-$700k',tier:'Top 8%',cohort:'senior',sponsored:false},
+  {id:26,co:'Macquarie',logo:'MQ',role:'Managing Director',loc:'Sydney, Australia',pay:'AUD $500k+',tier:'Top 5%',cohort:'senior',sponsored:false}
+];
 
-// ═══ NAV ═══
 function goPage(p) {
   document.querySelectorAll('.page').forEach(function(x){ x.classList.remove('show'); });
-  document.getElementById('page-' + p).classList.add('show');
+  document.getElementById('page-'+p).classList.add('show');
   document.querySelectorAll('.nt').forEach(function(b){ b.classList.remove('on'); });
-  var map = {upload:'nt-score', jobs:'nt-jobs', track:'nt-track', result:'nt-score'};
+  var map = {upload:'nt-score',jobs:'nt-jobs',track:'nt-track',result:'nt-score'};
   if (map[p]) document.getElementById(map[p]).classList.add('on');
   if (p === 'jobs') renderBrowse('all');
-  window.scrollTo(0, 0);
+  window.scrollTo(0,0);
 }
-
 function goSection(id) {
   goPage('landing');
   setTimeout(function(){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }, 120);
 }
-
-// ═══ FILE HANDLING ═══
-function onDrag(e, on) { e.preventDefault(); document.getElementById('dzone').classList.toggle('drag', !!on); }
-function onDrop(e) { e.preventDefault(); document.getElementById('dzone').classList.remove('drag'); if (e.dataTransfer.files[0]) handleF(e.dataTransfer.files[0]); }
-function onFile(inp) { if (inp.files[0]) handleF(inp.files[0]); }
+function onDrag(e,on){ e.preventDefault(); document.getElementById('dzone').classList.toggle('drag',!!on); }
+function onDrop(e){ e.preventDefault(); document.getElementById('dzone').classList.remove('drag'); if(e.dataTransfer.files[0]) handleF(e.dataTransfer.files[0]); }
+function onFile(inp){ if(inp.files[0]) handleF(inp.files[0]); }
 function handleF(file) {
   var nm = document.getElementById('dz-name');
-  if (file.name.toLowerCase().endsWith('.pdf')) {
-    nm.textContent = 'Uploaded: ' + file.name + ' — also paste text below for best accuracy';
+  if (file.name.toLowerCase().indexOf('.pdf') > -1) {
+    nm.textContent = 'Uploaded: ' + file.name + ' - also paste text below for best accuracy';
     nm.style.color = 'var(--au)';
-    cvRaw = 'PDF file: ' + file.name;
+    cvRaw = 'PDF: ' + file.name;
   } else {
     var r = new FileReader();
-    r.onload = function(e) {
-      cvRaw = e.target.result;
-      document.getElementById('cv-text').value = cvRaw.substring(0, 6000);
-    };
+    r.onload = function(e){ cvRaw = e.target.result; document.getElementById('cv-text').value = cvRaw.substring(0,6000); };
     r.readAsText(file);
     nm.textContent = 'Uploaded: ' + file.name;
     nm.style.color = 'var(--gn)';
   }
 }
-
-// ═══ COHORT ═══
 function setCohort(c) {
   cohort = c;
-  ['fresher','mid','senior'].forEach(function(x){ document.getElementById('co-'+x).classList.toggle('sel', x===c); });
+  ['fresher','mid','senior'].forEach(function(x){ document.getElementById('co-'+x).classList.toggle('sel',x===c); });
 }
 function autoCohort(v) {
   var a = parseInt(v);
-  if (!isNaN(a)) setCohort(a <= 22 ? 'fresher' : a <= 35 ? 'mid' : 'senior');
+  if (!isNaN(a)) setCohort(a<=22?'fresher':a<=35?'mid':'senior');
+}
+function pStyle(p) {
+  if (p>=95) return {stroke:'var(--au)',pill:'pill-au'};
+  if (p>=80) return {stroke:'var(--bl)',pill:'pill-bl'};
+  if (p>=60) return {stroke:'var(--pu)',pill:'pill-pu'};
+  return {stroke:'var(--t2)',pill:'pill-gray'};
 }
 
-// ═══ API CALL ═══
 async function apiCall(cv, role, ch) {
   var cfg = COHORTS[ch];
-  var prompt = 'You are Apex scoring engine. Score this candidate for the target role.\n\n'
+  var prompt = 'You are Apex scoring engine. Score this candidate.\n\n'
     + cfg.prompt + '\n\n'
-    + 'CALIBRATION:\n'
-    + '- No notable background: 25-50th percentile\n'
-    + '- Decent but unremarkable: 52-70th\n'
-    + '- Solid (good school OR good internship): 72-85th\n'
-    + '- Strong (good school AND good internship): 86-93rd\n'
-    + '- Elite (top global school + top internship + strong extras): 94-99.9th\n\n'
-    + 'Target Role: ' + role + '\n'
-    + 'Resume:\n' + cv + '\n\n'
-    + 'Return ONLY valid JSON with these exact keys:\n'
-    + '{"percentile":0,"tier_label":"Top 10%","education_score":0,"projects_score":0,"extra_score":0,"experience_score":0,"other_score":0,"strengths":["a","b","c"],"gaps":["a","b","c"],"summary":"one sentence","headline":"short headline","free_tip":{"action":"specific action","gain":"+X percentile points","timeframe":"timeframe"}}';
+    + 'CALIBRATION: no notable background=25-50th. decent=52-70th. solid=72-85th. strong=86-93rd. elite=94-99.9th\n\n'
+    + 'Target Role: ' + role + '\nResume:\n' + cv + '\n\n'
+    + 'Return ONLY valid JSON with exactly these keys (no markdown no extra text):\n'
+    + '{"percentile":75.5,"tier_label":"Top 25%","education_score":70,"projects_score":65,"extra_score":60,"experience_score":70,"other_score":60,"strengths":["strength1","strength2","strength3"],"gaps":["gap1","gap2","gap3"],"summary":"one honest sentence","headline":"short headline","free_tip":{"action":"specific action to take","gain":"+5-8 percentile points","timeframe":"3-6 months"}}';
 
   var res = await fetch('/api/score', {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers: {'Content-Type':'application/json'},
     body: JSON.stringify({prompt: prompt})
   });
-
   if (!res.ok) {
     var errText = await res.text().catch(function(){ return 'no body'; });
-    throw new Error('HTTP ' + res.status + ': ' + errText.substring(0, 200));
+    throw new Error('HTTP ' + res.status + ': ' + errText.substring(0,200));
   }
-
   var d = await res.json();
-  var txt = (d.content || []).map(function(b){ return b.text || ''; }).join('').replace(/```json|```/g,'').trim();
-  if (!txt) throw new Error('Empty API response. Check ANTHROPIC_API_KEY in Netlify environment variables.');
+  var txt = (d.content||[]).map(function(b){ return b.text||''; }).join('').replace(/```json|```/g,'').trim();
+  if (!txt) throw new Error('Empty response. Check GEMINI_API_KEY in Vercel environment variables.');
   return JSON.parse(txt);
 }
 
-// ═══ SCORE FLOW ═══
 async function startScore() {
   var fn   = document.getElementById('s-fn').value.trim();
   var em   = document.getElementById('s-em').value.trim();
@@ -785,50 +674,42 @@ async function startScore() {
   var fileUploaded = dzName.textContent.trim().length > 2;
   var err  = document.getElementById('up-err');
 
-  // Clear red borders
-  ['s-fn','s-em','s-role','cv-text'].forEach(function(id){
-    document.getElementById(id).style.borderColor = '';
-  });
+  ['s-fn','s-em','s-role','cv-text'].forEach(function(id){ document.getElementById(id).style.borderColor=''; });
 
   var missing = [];
-  if (!fn)   { missing.push('First name');   document.getElementById('s-fn').style.borderColor   = 'var(--rd)'; }
-  if (!em)   { missing.push('Email');         document.getElementById('s-em').style.borderColor   = 'var(--rd)'; }
-  if (!role) { missing.push('Target role');   document.getElementById('s-role').style.borderColor  = 'var(--rd)'; }
-  if (!cv && !fileUploaded) { missing.push('CV text'); document.getElementById('cv-text').style.borderColor = 'var(--rd)'; }
+  if (!fn)   { missing.push('First name');  document.getElementById('s-fn').style.borderColor='var(--rd)'; }
+  if (!em)   { missing.push('Email');        document.getElementById('s-em').style.borderColor='var(--rd)'; }
+  if (!role) { missing.push('Target role'); document.getElementById('s-role').style.borderColor='var(--rd)'; }
+  if (!cv && !fileUploaded) { missing.push('CV text'); document.getElementById('cv-text').style.borderColor='var(--rd)'; }
 
   if (missing.length) {
     err.textContent = 'Please complete: ' + missing.join(', ') + '.';
     err.classList.add('on');
     setTimeout(function(){
       err.classList.remove('on');
-      ['s-fn','s-em','s-role','cv-text'].forEach(function(id){ document.getElementById(id).style.borderColor = ''; });
+      ['s-fn','s-em','s-role','cv-text'].forEach(function(id){ document.getElementById(id).style.borderColor=''; });
     }, 5000);
     return;
   }
 
   err.classList.remove('on');
   rEmail = em;
-
   document.getElementById('form-view').style.display  = 'none';
   document.getElementById('score-anim').style.display = 'block';
 
   var mi = 0;
   var t = setInterval(function(){
-    document.getElementById('sc-m').textContent = MSGS[mi % MSGS.length][0];
-    document.getElementById('sc-s').textContent = MSGS[mi % MSGS.length][1];
+    document.getElementById('sc-m').textContent = MSGS[mi%MSGS.length][0];
+    document.getElementById('sc-s').textContent = MSGS[mi%MSGS.length][1];
     mi++;
   }, 950);
 
   try {
-    var r = await apiCall(cv || dzName.textContent, role, cohort);
+    var cvFinal = cv || dzName.textContent;
+    var r = await apiCall(cvFinal, role, cohort);
     clearInterval(t);
-    var app = {
-      email: em, name: fn, company: 'Apex Portal',
-      role: role, stage: 'Applied', cohort: cohort,
-      intl: intl === 'yes', percentile: r.percentile, summary: r.summary
-    };
-    apps.unshift(app);
-    renderResult(r, fn, role, intl === 'yes');
+    apps.unshift({email:em,name:fn,company:'Apex Portal',role:role,stage:'Applied',cohort:cohort,intl:intl==='yes',percentile:r.percentile,summary:r.summary});
+    renderResult(r, fn, role, intl==='yes');
     goPage('result');
   } catch(e) {
     clearInterval(t);
@@ -850,175 +731,111 @@ function resetUpload() {
   goPage('upload');
 }
 
-// ═══ RENDER RESULT ═══
-function pStyle(p) {
-  if (p >= 95) return {stroke:'var(--au)',  pill:'pill-au'};
-  if (p >= 80) return {stroke:'var(--bl)',  pill:'pill-bl'};
-  if (p >= 60) return {stroke:'var(--pu)',  pill:'pill-pu'};
-  return              {stroke:'var(--t2)',  pill:'pill-gray'};
-}
-
 function renderResult(r, name, role, isIntl) {
   var cfg = COHORTS[cohort];
   var ps  = pStyle(r.percentile);
-
-  document.getElementById('r-crumb').textContent = name.toUpperCase() + ' · ' + role.toUpperCase();
-  document.getElementById('r-name').textContent  = name + "'s Score";
+  document.getElementById('r-crumb').textContent = name.toUpperCase() + ' - ' + role.toUpperCase();
+  document.getElementById('r-name').textContent  = name + ' Score';
   document.getElementById('r-pct').textContent   = r.percentile.toFixed(1);
-
   setTimeout(function(){
     var ring = document.getElementById('ring');
     ring.style.stroke = ps.stroke;
-    ring.style.strokeDashoffset = String(421 - (r.percentile / 100) * 421);
+    ring.style.strokeDashoffset = String(421 - (r.percentile/100)*421);
     ring.style.transition = 'stroke-dashoffset 1.5s cubic-bezier(.4,0,.2,1), stroke .3s';
   }, 100);
-
   var te = document.getElementById('r-tier');
   te.textContent = r.tier_label;
   te.className   = 'pill ' + ps.pill;
-
   document.getElementById('r-head').textContent = r.headline || r.tier_label;
   document.getElementById('r-sum').textContent  = r.summary;
-
   var cb = document.getElementById('b-cohort');
-  cb.textContent = cfg.badge;
-  cb.className   = 'pill ' + cfg.pill;
+  cb.textContent = cfg.badge; cb.className = 'pill ' + cfg.pill;
   document.getElementById('b-role').textContent = role;
   if (isIntl) document.getElementById('b-intl').classList.remove('hidden');
   else        document.getElementById('b-intl').classList.add('hidden');
 
-  // Score bars
-  document.getElementById('sc-rows').innerHTML = cfg.keys.map(function(k, i){
-    return '<div class="sc-r">'
-      + '<div class="sc-meta">'
-      + '<span class="sc-l">' + cfg.labels[i] + ' <span class="sc-w">(' + cfg.weights[i] + '%)</span></span>'
-      + '<span class="sc-v" style="color:' + cfg.colors[i] + '">' + (r[k] || 0) + '/100</span>'
-      + '</div>'
-      + '<div class="bar-tr"><div class="bar-fi" id="bf' + i + '" style="width:0%;background:' + cfg.colors[i] + '"></div></div>'
-      + '</div>';
+  document.getElementById('sc-rows').innerHTML = cfg.keys.map(function(k,i){
+    return '<div class="sc-r"><div class="sc-meta"><span class="sc-l">'+cfg.labels[i]+' <span class="sc-w">('+cfg.weights[i]+'%)</span></span><span class="sc-v" style="color:'+cfg.colors[i]+'">'+(r[k]||0)+'/100</span></div><div class="bar-tr"><div class="bar-fi" id="bf'+i+'" style="width:0%;background:'+cfg.colors[i]+'"></div></div></div>';
   }).join('');
   setTimeout(function(){
-    cfg.keys.forEach(function(k, i){
-      var el = document.getElementById('bf' + i);
-      if (el) el.style.width = (r[k] || 0) + '%';
-    });
+    cfg.keys.forEach(function(k,i){ var el=document.getElementById('bf'+i); if(el) el.style.width=(r[k]||0)+'%'; });
   }, 180);
 
-  // Strengths + gaps
-  document.getElementById('r-str').innerHTML  = (r.strengths || []).map(function(s){ return '<span class="tag tag-gn">' + s + '</span>'; }).join('');
-  document.getElementById('r-gaps').innerHTML = (r.gaps || []).map(function(g){ return '<span class="tag tag-rd">' + g + '</span>'; }).join('');
+  document.getElementById('r-str').innerHTML  = (r.strengths||[]).map(function(s){ return '<span class="tag tag-gn">'+s+'</span>'; }).join('');
+  document.getElementById('r-gaps').innerHTML = (r.gaps||[]).map(function(g){ return '<span class="tag tag-rd">'+g+'</span>'; }).join('');
 
-  // Free tip
   var ft = r.free_tip || {};
   document.getElementById('free-tip').textContent  = ft.action || 'Apply to a target internship before the next recruiting cycle.';
   document.getElementById('free-gain').textContent = ft.gain   || '+5-10 pts';
 
-  // Jobs
   renderJobsSection('all', false);
 }
 
-// ═══ JOBS ═══
 function jobCard(j, showApply) {
-  var sponsBadge = j.sponsored ? '<span class="pill pill-gn" style="font-size:10px">Visa OK</span>' : '';
-  var applyBtn   = showApply
-    ? '<button class="btn btn-ghost btn-sm" onclick="applyOne(this,' + j.id + ')">Apply</button>'
-    : '<button class="btn btn-au btn-sm"    onclick="goPage(\'upload\')">Score first</button>';
-  return '<div class="job-row">'
-    + '<div class="job-logo">' + j.logo + '</div>'
-    + '<div class="job-info">'
-    + '<div class="job-co">' + j.co + ' <span style="font-weight:400;color:var(--t2)">— ' + j.role + '</span></div>'
-    + '<div class="job-det">' + j.loc + '</div>'
-    + '<div class="job-meta">' + j.pay + ' · ' + j.cohort + '</div>'
-    + '</div>'
-    + '<div class="job-right">'
-    + '<span class="pill pill-au" style="font-size:10px">' + j.tier + '</span>'
-    + sponsBadge
-    + applyBtn
-    + '</div>'
-    + '</div>';
+  var spons = j.sponsored ? '<span class="pill pill-gn" style="font-size:10px">Visa OK</span>' : '';
+  var btn   = showApply
+    ? '<button class="btn btn-ghost btn-sm" onclick="applyOne(this,'+j.id+')">Apply</button>'
+    : '<button class="btn btn-au btn-sm" onclick="goPage(\'upload\')">Score first</button>';
+  return '<div class="job-row"><div class="job-logo">'+j.logo+'</div><div class="job-info"><div class="job-co">'+j.co+' <span style="font-weight:400;color:var(--t2)">'+j.role+'</span></div><div class="job-det">'+j.loc+'</div><div class="job-meta">'+j.pay+' - '+j.cohort+'</div></div><div class="job-right"><span class="pill pill-au" style="font-size:10px">'+j.tier+'</span>'+spons+btn+'</div></div>';
 }
 
 function renderJobsSection(filter, isBrowse) {
-  var list = filter === 'all'      ? JOBS
-           : filter === 'sponsored'? JOBS.filter(function(j){ return j.sponsored; })
-           : JOBS.filter(function(j){ return j.cohort === filter; });
-  var elId = isBrowse ? 'browse-job-list' : 'job-list';
-  var el   = document.getElementById(elId);
+  var list = filter==='all' ? JOBS : filter==='sponsored' ? JOBS.filter(function(j){ return j.sponsored; }) : JOBS.filter(function(j){ return j.cohort===filter; });
+  var el = document.getElementById(isBrowse?'browse-job-list':'job-list');
   if (!el) return;
-  el.innerHTML = list.length
-    ? list.map(function(j){ return jobCard(j, !isBrowse); }).join('')
-    : '<div style="text-align:center;padding:2rem;color:var(--t3)">No roles match this filter</div>';
+  el.innerHTML = list.length ? list.map(function(j){ return jobCard(j,!isBrowse); }).join('') : '<div style="text-align:center;padding:2rem;color:var(--t3)">No roles match this filter</div>';
   var jc = document.getElementById('r-jcount');
   if (jc && !isBrowse) jc.textContent = String(list.length);
 }
 
-function filterJobs(f, btn) {
-  document.querySelectorAll('.card .jf').forEach(function(b){ b.classList.remove('on'); });
+function filterJobs(f,btn) {
+  document.querySelectorAll('#page-result .jf').forEach(function(b){ b.classList.remove('on'); });
   btn.classList.add('on');
-  renderJobsSection(f, false);
+  renderJobsSection(f,false);
 }
-function filterBrowse(f, btn) {
+function filterBrowse(f,btn) {
   document.querySelectorAll('#page-jobs .jf').forEach(function(b){ b.classList.remove('on'); });
   btn.classList.add('on');
-  renderJobsSection(f, true);
+  renderJobsSection(f,true);
 }
-function renderBrowse(f) { renderJobsSection(f, true); }
+function renderBrowse(f){ renderJobsSection(f,true); }
 
-function applyOne(btn, id) {
-  btn.textContent = 'Applied';
-  btn.disabled    = true;
-  btn.style.color = 'var(--gn)';
-  btn.style.borderColor = 'var(--gnr)';
-  var j = JOBS.find(function(x){ return x.id === id; });
-  if (j && !apps.find(function(a){ return a.company === j.co && a.email === rEmail; })) {
-    apps.push({email:rEmail, company:j.co, role:j.role, stage:'Applied', cohort:j.cohort, percentile:0, summary:'Application submitted via Apex.'});
-  }
+function applyOne(btn,id) {
+  btn.textContent='Applied'; btn.disabled=true; btn.style.color='var(--gn)'; btn.style.borderColor='var(--gnr)';
+  var j = JOBS.find(function(x){ return x.id===id; });
+  if (j && !apps.find(function(a){ return a.company===j.co && a.email===rEmail; }))
+    apps.push({email:rEmail,company:j.co,role:j.role,stage:'Applied',cohort:j.cohort,percentile:0,summary:'Application submitted via Apex.'});
 }
-
 function applyAll(btn) {
-  btn.textContent = 'Applied to all!';
-  btn.className   = 'btn btn-gn';
-  btn.disabled    = true;
-  document.querySelectorAll('#job-list button:not(:disabled)').forEach(function(b){
-    b.textContent = 'Applied'; b.disabled = true; b.style.color = 'var(--gn)';
-  });
+  btn.textContent='Applied to all!'; btn.className='btn btn-gn'; btn.disabled=true;
+  document.querySelectorAll('#job-list button:not(:disabled)').forEach(function(b){ b.textContent='Applied'; b.disabled=true; b.style.color='var(--gn)'; });
 }
 
-// ═══ TRACK ═══
 function doTrack() {
-  var em      = document.getElementById('t-em').value.trim().toLowerCase();
+  var em = document.getElementById('t-em').value.trim().toLowerCase();
   if (!em) return;
-  var matches = apps.filter(function(a){ return (a.email || '').toLowerCase() === em; });
-  var res     = document.getElementById('track-res');
-
+  var matches = apps.filter(function(a){ return (a.email||'').toLowerCase()===em; });
+  var res = document.getElementById('track-res');
   if (!matches.length) {
-    res.innerHTML = '<div class="card" style="text-align:center;padding:3rem;max-width:460px">'
-      + '<div style="font-size:36px;opacity:.15;margin-bottom:12px">○</div>'
-      + '<div style="font-size:15px;font-weight:600;margin-bottom:7px">No applications found</div>'
-      + '<div style="font-size:13px;color:var(--t2);font-weight:300;margin-bottom:1.5rem">Nothing for <strong style="color:var(--tx)">' + em + '</strong>.</div>'
-      + '<button class="btn btn-ghost btn-sm" onclick="resetTrack()">Try another email</button>'
-      + '</div>';
+    res.innerHTML = '<div class="card" style="text-align:center;padding:3rem;max-width:460px"><div style="font-size:36px;opacity:.15;margin-bottom:12px">o</div><div style="font-size:15px;font-weight:600;margin-bottom:7px">No applications found</div><div style="font-size:13px;color:var(--t2);font-weight:300;margin-bottom:1.5rem">Nothing for '+em+'.</div><button class="btn btn-ghost btn-sm" onclick="resetTrack()">Try another email</button></div>';
     return;
   }
-
   res.innerHTML = matches.map(function(app){
-    var si  = STAGES.indexOf(app.stage);
-    var ps  = pStyle(app.percentile);
-    var pctBadge = app.percentile > 0
-      ? '<span class="pill ' + ps.pill + '" style="font-size:11px">' + app.percentile.toFixed(1) + 'th pct</span>'
-      : '';
-    var dots = STAGES.map(function(s, i){
-      var cls = i < si ? 'done' : i === si ? 'cur' : '';
-      var ic  = i < si ? '&#10003;' : i === si ? '&#9679;' : String(i+1);
-      return '<div class="ps"><div class="pd ' + cls + '">' + ic + '</div><div class="pl ' + cls + '">' + s + '</div></div>';
+    var si = STAGES.indexOf(app.stage);
+    var ps = pStyle(app.percentile);
+    var pctBadge = app.percentile>0 ? '<span class="pill '+ps.pill+'" style="font-size:11px">'+app.percentile.toFixed(1)+'th</span>' : '';
+    var dots = STAGES.map(function(s,i){
+      var cls = i<si?'done':i===si?'cur':'';
+      var ic  = i<si?'v':i===si?'*':String(i+1);
+      return '<div class="ps"><div class="pd '+cls+'">'+ic+'</div><div class="pl '+cls+'">'+s+'</div></div>';
     }).join('');
-    var note = app.summary ? '<div class="pc-note">' + app.summary + '</div>' : '';
-    return '<div class="pipe-card">'
-      + '<div class="pc-top">'
-      + '<div><div class="pc-co">' + app.company + '</div><div class="pc-role">' + app.role + '</div></div>'
-      + '<div class="flex aic gap8">' + pctBadge + '<span class="pill pill-gray" style="font-size:10px">' + app.stage + '</span></div>'
-      + '</div>'
-      + '<div class="pipe-row">' + dots + '</div>'
-      + note
-      + '</div>';
-  }).join('') + '<button class="btn btn-ghost btn-sm" style
+    return '<div class="pipe-card"><div class="pc-top"><div><div class="pc-co">'+app.company+'</div><div class="pc-role">'+app.role+'</div></div><div class="flex aic gap8">'+pctBadge+'<span class="pill pill-gray" style="font-size:10px">'+app.stage+'</span></div></div><div class="pipe-row">'+dots+'</div>'+(app.summary?'<div class="pc-note">'+app.summary+'</div>':'')+'</div>';
+  }).join('') + '<button class="btn btn-ghost btn-sm" style="margin-top:6px" onclick="resetTrack()">Search another</button>';
+}
+function resetTrack() {
+  document.getElementById('track-res').innerHTML='';
+  document.getElementById('t-em').value='';
+}
+</script>
+</body>
+</html>

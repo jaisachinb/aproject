@@ -1,29 +1,33 @@
-// api/score.js — Vercel serverless function (free tier)
+// api/score.js — Vercel serverless function
+// Uses Groq free tier — 14,400 requests/day, no credit card needed
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-  if (!GEMINI_API_KEY) {
-    return res.status(500).json({ error: 'Add GEMINI_API_KEY in Vercel environment variables.' });
+  const GROQ_API_KEY = process.env.GROQ_API_KEY;
+  if (!GROQ_API_KEY) {
+    return res.status(500).json({ error: 'Add GROQ_API_KEY in Vercel environment variables.' });
   }
 
-  const { prompt } = req.body;
+  const { prompt } = req.body || {};
   if (!prompt) {
     return res.status(400).json({ error: 'Missing prompt' });
   }
 
   try {
-    const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + GEMINI_API_KEY;
-
-    const response = await fetch(url, {
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + GROQ_API_KEY
+      },
       body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.3, maxOutputTokens: 1000 }
+        model: 'llama-3.3-70b-versatile',
+        messages: [{ role: 'user', content: prompt }],
+        temperature: 0.3,
+        max_tokens: 1000
       })
     });
 
@@ -33,13 +37,13 @@ export default async function handler(req, res) {
     }
 
     const data = await response.json();
-    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    const text = data?.choices?.[0]?.message?.content || '';
 
     if (!text) {
-      return res.status(500).json({ error: 'Empty response from Gemini' });
+      return res.status(500).json({ error: 'Empty response from Groq' });
     }
 
-    // Return in same shape the frontend expects
+    // Return in shape the frontend expects
     return res.status(200).json({ content: [{ type: 'text', text: text }] });
 
   } catch (err) {

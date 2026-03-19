@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/hr", "destination": "/hr.html" },
+    { "source": "/api/score", "destination": "/api/score.js" }
+  ]
+}

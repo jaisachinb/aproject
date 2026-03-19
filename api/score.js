@@ -1,29 +1,18 @@
-// netlify/functions/score.js
-// Uses Google Gemini — free tier via Google AI Studio
+// api/score.js — Vercel serverless function (free tier)
 
-exports.handler = async (event) => {
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method not allowed' };
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
   const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
   if (!GEMINI_API_KEY) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: 'Add GEMINI_API_KEY in Netlify environment variables.' })
-    };
+    return res.status(500).json({ error: 'Add GEMINI_API_KEY in Vercel environment variables.' });
   }
 
-  let body;
-  try {
-    body = JSON.parse(event.body);
-  } catch {
-    return { statusCode: 400, body: JSON.stringify({ error: 'Invalid JSON body' }) };
-  }
-
-  const { prompt } = body;
+  const { prompt } = req.body;
   if (!prompt) {
-    return { statusCode: 400, body: JSON.stringify({ error: 'Missing prompt' }) };
+    return res.status(400).json({ error: 'Missing prompt' });
   }
 
   try {
@@ -40,26 +29,20 @@ exports.handler = async (event) => {
 
     if (!response.ok) {
       const err = await response.text();
-      console.error('Gemini error:', response.status, err);
-      return { statusCode: response.status, body: err };
+      return res.status(response.status).send(err);
     }
 
     const data = await response.json();
     const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
 
     if (!text) {
-      return { statusCode: 500, body: JSON.stringify({ error: 'Empty response from Gemini' }) };
+      return res.status(500).json({ error: 'Empty response from Gemini' });
     }
 
-    // Wrap in same shape the frontend expects
-    return {
-      statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ content: [{ type: 'text', text: text }] })
-    };
+    // Return in same shape the frontend expects
+    return res.status(200).json({ content: [{ type: 'text', text: text }] });
 
   } catch (err) {
-    console.error('Function error:', err);
-    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
+    return res.status(500).json({ error: err.message });
   }
-};
+}

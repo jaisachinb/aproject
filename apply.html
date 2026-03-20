@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TopScreen — Know Your Rank. Get the Job.</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; -webkit-font-smoothing: antialiased; }
+
+:root {
+  --ink: #0D0F1A;
+  --ink2: #3D4460;
+  --ink3: #8C93AD;
+  --ink4: #BFC4D6;
+  --bg: #F5F6FA;
+  --surface: #FFFFFF;
+  --border: rgba(0,0,0,0.07);
+  --border2: rgba(0,0,0,0.12);
+  --gold: #C8860A;
+  --gold-light: #FEF3DC;
+  --gold-mid: #F0A830;
+  --gold-border: rgba(200,134,10,0.25);
+  --blue: #1847C8;
+  --blue-light: #EEF3FF;
+  --blue-border: rgba(24,71,200,0.2);
+  --green: #0A7A56;
+  --green-light: #E8F8F3;
+  --green-border: rgba(10,122,86,0.2);
+  --red: #C82828;
+  --red-light: #FEF0F0;
+  --red-border: rgba(200,40,40,0.2);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.04);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,.1), 0 2px 8px rgba(0,0,0,.06);
+  --r: 12px;
+  --r-lg: 18px;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 52px;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 1.5rem;
+}
+.brand {
+  font-size: 16px; font-weight: 900; letter-spacing: -0.5px; color: var(--ink);
+  display: flex; align-items: center; gap: 6px;
+}
+.brand-mark {
+  width: 26px; height: 26px; border-radius: 7px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-mid));
+  display: flex; align-items: center; justify-content: center;
+}
+.brand-mark svg { width: 14px; height: 14px; }
+.brand-text { letter-spacing: -0.4px; }
+.brand-text span { color: var(--gold); }
+.topbar-right {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 600; color: var(--ink3);
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+.pulse {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 0 rgba(10,122,86,0.4);
+  animation: pulse-ring 1.8s ease-out infinite;
+}
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(10,122,86,0.5); }
+  70% { box-shadow: 0 0 0 6px rgba(10,122,86,0); }
+  100% { box-shadow: 0 0 0 0 rgba(10,122,86,0); }
+}
+
+/* ── LAYOUT ── */
+.wrap {
+  min-height: 100vh;
+  padding: 76px 1.25rem 3rem;
+  display: flex; flex-direction: column; align-items: center;
+}
+.col { width: 100%; max-width: 520px; }
+
+/* ── SCREENS ── */
+.screen { display: none; }
+.screen.on { display: block; }
+
+/* ── JOB BANNER ── */
+.job-banner {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 1.25rem 1.4rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow-sm);
+  display: flex; align-items: center; gap: 1rem;
+  position: relative; overflow: hidden;
+}
+.job-banner::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-mid), #FFC647);
+}
+.job-logo {
+  width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+  background: var(--gold-light);
+  border: 1px solid var(--gold-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800; color: var(--gold);
+}
+.job-info { flex: 1; min-width: 0; }
+.job-title { font-size: 15px; font-weight: 700; color: var(--ink); letter-spacing: -0.2px; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.job-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.job-meta-item { font-size: 12px; color: var(--ink3); display: flex; align-items: center; gap: 3px; }
+.verified-badge { display: inline-flex; align-items: center; gap: 3px; font-size: 11px; font-weight: 600; color: var(--green); background: var(--green-light); border: 1px solid var(--green-border); padding: 2px 7px; border-radius: 20px; }
+
+/* ── FORM CARD ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1rem;
+}
+.card-title { font-size: 17px; font-weight: 800; letter-spacing: -0.4px; color: var(--ink); margin-bottom: 4px; }
+.card-sub { font-size: 13px; color: var(--ink3); font-weight: 400; margin-bottom: 1.5rem; line-height: 1.55; }
+.section-label {
+  font-size: 10px; font-weight: 700; color: var(--ink3);
+  text-transform: uppercase; letter-spacing: 0.1em;
+  margin-bottom: 10px; margin-top: 1.25rem;
+}
+.section-label:first-child { margin-top: 0; }
+
+/* ── INPUTS ── */
+.field { margin-bottom: 0.75rem; }
+.field-label { display: block; font-size: 12px; font-weight: 600; color: var(--ink2); margin-bottom: 5px; }
+.inp {
+  width: 100%; padding: 10px 13px;
+  background: var(--bg); border: 1.5px solid var(--border2);
+  border-radius: var(--r); color: var(--ink);
+  font-family: 'Inter', sans-serif; font-size: 14px;
+  outline: none; transition: border-color 0.14s, box-shadow 0.14s, background 0.14s;
+  -webkit-appearance: none;
+}
+.inp:focus { border-color: var(--blue); background: var(--surface); box-shadow: 0 0 0 3px var(--blue-light); }
+.inp::placeholder { color: var(--ink4); }
+select.inp option { background: var(--surface); }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* ── DROPZONE ── */
+.dzone {
+  border: 2px dashed var(--border2);
+  border-radius: var(--r);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.18s;
+  background: var(--bg);
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+.dzone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.dzone:hover, .dzone.drag { border-color: var(--gold); border-style: solid; background: var(--gold-light); }
+.dzone.done { border-color: var(--green); border-style: solid; background: var(--green-light); }
+.dz-icon {
+  width: 40px; height: 40px; border-radius: 10px; margin: 0 auto 0.75rem;
+  display: flex; align-items: center; justify-content: center; transition: all 0.18s;
+}
+.dzone .dz-icon { background: var(--surface); border: 1px solid var(--border2); }
+.dzone.done .dz-icon { background: var(--green); border-color: var(--green); }
+.dzone.drag .dz-icon { background: var(--gold-light); border-color: var(--gold-border); }
+.dz-title { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+.dzone.done .dz-title { color: var(--green); }
+.dz-hint { font-size: 12px; color: var(--ink3); }
+.dz-name { font-size: 12px; font-weight: 600; color: var(--green); margin-top: 5px; min-height: 1px; }
+
+.or-divider {
+  display: flex; align-items: center; gap: 10px;
+  margin: 0.75rem 0; color: var(--ink4); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.or-divider::before, .or-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+textarea.inp { resize: none; height: 110px; line-height: 1.6; font-size: 13px; }
+
+/* ── ALERT ── */
+.alert { display: none; padding: 10px 13px; border-radius: var(--r); font-size: 13px; font-weight: 500; margin-bottom: 1rem; }
+.alert.on { display: flex; align-items: flex-start; gap: 8px; }
+.alert-error { background: var(--red-light); border: 1px solid var(--red-border); color: var(--red); }
+
+/* ── SUBMIT BTN ── */
+.btn-primary {
+  width: 100%; padding: 14px;
+  background: linear-gradient(135deg, #C8860A, #F0A830);
+  color: white; font-family: 'Inter', sans-serif;
+  font-size: 15px; font-weight: 800; letter-spacing: -0.2px;
+  border: none; border-radius: var(--r); cursor: pointer;
+  transition: all 0.16s; margin-top: 0.5rem;
+  box-shadow: 0 2px 12px rgba(200,134,10,0.35);
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(200,134,10,0.45); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+.btn-secondary {
+  width: 100%; padding: 12px;
+  background: transparent; color: var(--ink3);
+  font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
+  border: 1.5px solid var(--border2); border-radius: var(--r); cursor: pointer;
+  transition: all 0.14s;
+}
+.btn-secondary:hover { color: var(--ink); border-color: var(--ink2); background: var(--bg); }
+
+.privacy-row {
+  display: flex; align-items: flex-start; gap: 8px;
+  padding: 10px 12px; border-radius: 9px; background: var(--bg);
+  margin-top: 0.9rem; font-size: 11px; color: var(--ink3); line-height: 1.55;
+}
+
+/* ── LOADING SCREEN ── */
+.loading-screen {
+  padding: 3rem 1.5rem;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
+}
+.loader-rings {
+  position: relative; width: 72px; height: 72px; margin: 0 auto 2rem;
+}
+.ring {
+  position: absolute; inset: 0; border-radius: 50%;
+  border: 3px solid transparent;
+}
+.ring-1 { border-top-color: var(--gold); animation: spin 0.9s linear infinite; }
+.ring-2 { inset: 10px; border-top-color: rgba(200,134,10,0.3); animation: spin 1.4s linear infinite reverse; }
+.ring-center {
+  position: absolute; inset: 22px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold-light), rgba(240,168,48,.08));
+  border: 1px solid var(--gold-border);
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.load-title { font-size: 17px; font-weight: 800; color: var(--ink); letter-spacing: -0.3px; margin-bottom: 4px; }
+.load-sub { font-size: 13px; color: var(--ink3); margin-bottom: 2rem; }
+.steps-list { width: 100%; max-width: 340px; display: flex; flex-direction: column; gap: 8px; }
+.step-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 13px; border-radius: 10px;
+  background: var(--surface); border: 1px solid var(--border);
+  font-size: 13px; font-weight: 500; color: var(--ink3);
+  transition: all 0.3s;
+}
+.step-item.active { background: var(--gold-light); border-color: var(--gold-border); color: var(--gold); }
+.step-item.done { background: var(--green-light); border-color: var(--green-border); color: var(--green); }
+.step-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ink4); flex-shrink: 0; transition: all 0.3s; }
+.step-item.active .step-dot { background: var(--gold); box-shadow: 0 0 6px rgba(200,134,10,.5); }
+.step-item.done .step-dot { background: var(--green); }
+
+/* ── RESULT SCREEN ── */
+
+/* Confetti header */
+.result-header {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 2rem 1.5rem 1.75rem;
+  text-align: center; margin-bottom: 1rem;
+  box-shadow: var(--shadow-md); position: relative; overflow: hidden;
+}
+.result-header::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, #C8860A, #F0A830, #4CAF50, #1847C8, #7C3AED);
+}
+.submitted-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 12px; border-radius: 20px;
+  background: var(--green-light); border: 1px solid var(--green-border);
+  font-size: 11px; font-weight: 700; color: var(--green);
+  letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 1.25rem;
+}
+
+/* SVG ring */
+.ring-wrap { position: relative; display: inline-block; margin-bottom: 1.25rem; }
+.ring-wrap svg { transform: rotate(-90deg); display: block; }
+.ring-inside {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  text-align: center;
+}
+.ring-number { font-size: 36px; font-weight: 900; letter-spacing: -2px; line-height: 1; }
+.ring-label { font-size: 9px; font-weight: 700; color: var(--ink3); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 2px; }
+
+.tier-badge {
+  display: inline-block; padding: 4px 14px; border-radius: 20px;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.02em;
+  margin-bottom: 0.75rem;
+}
+.result-headline { font-size: 19px; font-weight: 800; letter-spacing: -0.4px; color: var(--ink); margin-bottom: 0.5rem; }
+.result-summary { font-size: 13px; color: var(--ink3); line-height: 1.65; max-width: 420px; margin: 0 auto; }
+
+/* Score bars */
+.scores-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-lg); overflow: hidden;
+  box-shadow: var(--shadow-sm); margin-bottom: 1rem;
+}
+.scores-card-head {
+  padding: 0.9rem 1.25rem; border-bottom: 1px solid var(--border);
+  font-size: 11px; font-weight: 700; color: var(--ink3);
+  text-transform: uppercase; letter-spacing: 0.1em;
+}
+.score-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 0.85rem 1.25rem; border-bottom: 1px solid var(--border);
+}
+.score-row:last-child { border-bottom: none; }
+.score-row-label { font-size: 13px; font-weight: 500; color: var(--ink); flex: 1; min-width: 0; }
+.score-row-bar { flex: 2; height: 5px; background: var(--bg); border-radius: 3px; overflow: hidden; }
+.score-row-fill { height: 100%; border-radius: 3px; transition: width 1.4s cubic-bezier(.4,0,.2,1); width: 0; }
+.score-row-val { font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; width: 30px; text-align: right; }
+
+/* Strengths & gaps */
+.sg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1rem; }
+.sg-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 1.1rem;
+  box-shadow: var(--shadow-sm);
+}
+.sg-card-head { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+.sg-item { display: flex; align-items: flex-start; gap: 7px; margin-bottom: 7px; font-size: 12px; color: var(--ink2); line-height: 1.45; }
+.sg-item:last-child { margin-bottom: 0; }
+.sg-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+
+/* Tip card */
+.tip-card {
+  background: var(--gold-light); border: 1px solid var(--gold-border);
+  border-radius: var(--r-lg); padding: 1.25rem;
+  box-shadow: var(--shadow-sm); margin-bottom: 1rem;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.tip-icon {
+  width: 36px; height: 36px; border-radius: 9px; flex-shrink: 0;
+  background: rgba(200,134,10,.15); border: 1px solid var(--gold-border);
+  display: flex; align-items: center; justify-content: center;
+}
+.tip-content { flex: 1; }
+.tip-label { font-size: 10px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px; }
+.tip-text { font-size: 13px; font-weight: 500; color: var(--ink); line-height: 1.55; margin-bottom: 7px; }
+.tip-gain {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 700; color: var(--green);
+  background: var(--green-light); border: 1px solid var(--green-border);
+  padding: 3px 9px; border-radius: 6px;
+}
+
+.foot { text-align: center; font-size: 11px; color: var(--ink4); margin-top: 1.5rem; }
+.foot a { color: var(--gold); text-decoration: none; font-weight: 600; }
+
+@media (max-width: 480px) {
+  .row2, .sg-grid { grid-template-columns: 1fr; }
+  .score-row-bar { flex: 1.5; }
+  .ring-number { font-size: 30px; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">
+      <svg viewBox="0 0 14 14" fill="none">
+        <path d="M7 1.5L2.5 4v5L7 11.5 11.5 9V4L7 1.5z" stroke="white" stroke-width="1.3" stroke-linejoin="round"/>
+        <path d="M5 7l1.5 1.5L9 5.5" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <span class="brand-text">Top<span>Screen</span></span>
+  </div>
+  <div class="topbar-right">
+    <div class="pulse"></div>
+    <span>Secure Application</span>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="col">
+
+<!-- ══════ SCREEN: FORM ══════ -->
+<div id="s-form" class="screen on">
+
+  <div class="job-banner" id="job-banner">
+    <div class="job-logo" id="jb-logo">?</div>
+    <div class="job-info">
+      <div class="job-title" id="jb-title">Loading position...</div>
+      <div class="job-meta">
+        <div class="job-meta-item" id="jb-loc">
+          <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M5.5 1C3.6 1 2 2.5 2 4.4c0 2.7 3.5 5.6 3.5 5.6s3.5-2.9 3.5-5.6C9 2.5 7.4 1 5.5 1z" stroke="currentColor" stroke-width="1.1"/><circle cx="5.5" cy="4.4" r="1.1" fill="currentColor"/></svg>
+          Loading...
+        </div>
+        <div class="job-meta-item" id="jb-pay" style="display:none">
+          <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><circle cx="5.5" cy="5.5" r="4" stroke="currentColor" stroke-width="1.1"/><path d="M5.5 3.5v4M4 5.5h3" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>
+          <span id="jb-pay-text"></span>
+        </div>
+        <div class="verified-badge">
+          <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><circle cx="4.5" cy="4.5" r="4.5" fill="currentColor"/><path d="M3 4.5l1.2 1.2 2.4-2.4" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Verified
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Your application</div>
+    <div class="card-sub">Submit your CV and get your global percentile score instantly — before the hiring team sees your profile.</div>
+
+    <div id="err-box" class="alert alert-error">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M7 4.5v3M7 9v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span id="err-text"></span>
+    </div>
+
+    <div class="section-label">Personal details</div>
+    <div class="row2">
+      <div class="field"><label class="field-label">First name</label><input class="inp" id="i-fn" type="text" placeholder="Alex" autocomplete="given-name"></div>
+      <div class="field"><label class="field-label">Last name</label><input class="inp" id="i-ln" type="text" placeholder="Chen" autocomplete="family-name"></div>
+    </div>
+    <div class="field"><label class="field-label">Work email</label><input class="inp" id="i-em" type="email" placeholder="alex@company.com" autocomplete="email"></div>
+
+    <div class="section-label">Your background</div>
+    <div class="row2">
+      <div class="field">
+        <label class="field-label">Age</label>
+        <input class="inp" id="i-age" type="number" placeholder="22" min="16" max="70" oninput="autoChort(this.value)">
+      </div>
+      <div class="field">
+        <label class="field-label">Experience level</label>
+        <select class="inp" id="i-cohort">
+          <option value="fresher">Fresher — 0 to 2 yrs</option>
+          <option value="mid">Mid-level — 3 to 7 yrs</option>
+          <option value="senior">Senior — 8+ yrs</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label class="field-label">Work authorisation</label>
+      <select class="inp" id="i-visa">
+        <option value="authorized">Authorised to work / citizen</option>
+        <option value="needs">Requires visa sponsorship</option>
+      </select>
+    </div>
+
+    <div class="section-label">Your CV</div>
+    <div class="dzone" id="dzone" ondragover="doDrag(event,1)" ondragleave="doDrag(event,0)" ondrop="doDrop(event)">
+      <input type="file" id="cv-file" accept=".pdf,.txt,.doc,.docx" onchange="doFile(this)">
+      <div class="dz-icon" id="dz-icon">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2v10M6 5l3-3 3 3" stroke="#8C93AD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2.5 13.5v2h13v-2" stroke="#8C93AD" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="dz-title" id="dz-title">Drop your CV here</div>
+      <div class="dz-hint">PDF, DOC, or TXT &nbsp;·&nbsp; or click to browse</div>
+      <div class="dz-name" id="dz-name"></div>
+    </div>
+
+    <div class="or-divider">or paste text</div>
+
+    <div class="field">
+      <textarea class="inp" id="cv-text" placeholder="Paste your full CV — education, internships, projects, skills, achievements..."></textarea>
+    </div>
+
+    <button class="btn-primary" onclick="doSubmit()">Submit application &rarr;</button>
+
+    <div class="privacy-row">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M6.5 1.5L1.5 3.5v3.75C1.5 9.9 3.8 12 6.5 12.5c2.7-.5 5-2.6 5-5.25V3.5L6.5 1.5z" stroke="#8C93AD" stroke-width="1.1" stroke-linejoin="round"/><path d="M4.5 6.5l1.5 1.5 2.5-2.5" stroke="#8C93AD" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Your CV is scored and sent only to this employer. Never shared beyond this application without your consent. You see your score first.
+    </div>
+  </div>
+
+  <div class="foot">Powered by <a href="#">TopScreen.ai</a> · AI Talent Intelligence</div>
+</div>
+
+<!-- ══════ SCREEN: LOADING ══════ -->
+<div id="s-load" class="screen">
+  <div class="card">
+    <div class="loading-screen">
+      <div class="loader-rings">
+        <div class="ring ring-1"></div>
+        <div class="ring ring-2"></div>
+        <div class="ring-center"></div>
+      </div>
+      <div class="load-title" id="load-t">Analysing your profile</div>
+      <div class="load-sub" id="load-s">Reading your education and experience signals</div>
+      <div class="steps-list">
+        <div class="step-item active" id="step-0"><div class="step-dot"></div><span>Extracting profile signals</span></div>
+        <div class="step-item" id="step-1"><div class="step-dot"></div><span>Applying role-specific scoring</span></div>
+        <div class="step-item" id="step-2"><div class="step-dot"></div><span>Calibrating global percentile</span></div>
+        <div class="step-item" id="step-3"><div class="step-dot"></div><span>Writing your assessment</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ SCREEN: RESULT ══════ -->
+<div id="s-result" class="screen">
+
+  <div class="result-header">
+    <div class="submitted-chip">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="5" fill="currentColor"/><path d="M3 5l1.5 1.5L7.5 3.5" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Application submitted to <span id="r-company" style="margin-left:3px">the company</span>
+    </div>
+    <div class="ring-wrap">
+      <svg width="148" height="148" viewBox="0 0 148 148">
+        <circle cx="74" cy="74" r="62" fill="none" stroke="#EEF0F5" stroke-width="9"/>
+        <circle cx="74" cy="74" r="62" fill="none" stroke-width="9"
+          stroke-linecap="round" stroke-dasharray="389" stroke-dashoffset="389"
+          id="ring-arc" style="transition: stroke-dashoffset 1.7s cubic-bezier(.35,0,.15,1); stroke: var(--gold)"/>
+      </svg>
+      <div class="ring-inside">
+        <div class="ring-number" id="r-pct" style="color:var(--gold)">—</div>
+        <div class="ring-label">Percentile</div>
+      </div>
+    </div>
+    <div class="tier-badge" id="r-badge">—</div>
+    <div class="result-headline" id="r-headline">—</div>
+    <div class="result-summary" id="r-summary">—</div>
+  </div>
+
+  <!-- Score breakdown -->
+  <div class="scores-card">
+    <div class="scores-card-head">Score breakdown</div>
+    <div id="score-rows"></div>
+  </div>
+
+  <!-- Strengths & gaps -->
+  <div class="sg-grid">
+    <div class="sg-card">
+      <div class="sg-card-head" style="color:var(--green)">Strengths</div>
+      <div id="sg-s"></div>
+    </div>
+    <div class="sg-card">
+      <div class="sg-card-head" style="color:var(--red)">To improve</div>
+      <div id="sg-g"></div>
+    </div>
+  </div>
+
+  <!-- Tip -->
+  <div class="tip-card">
+    <div class="tip-icon">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5v2M8 12.5v2M3.5 8h-2M14.5 8h-2M5.3 5.3L3.9 3.9M12.1 12.1l-1.4-1.4M10.7 5.3l1.4-1.4M5.3 10.7l-1.4 1.4" stroke="var(--gold)" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="8" r="2.5" stroke="var(--gold)" stroke-width="1.4"/></svg>
+    </div>
+    <div class="tip-content">
+      <div class="tip-label">Your top action to rank higher</div>
+      <div class="tip-text" id="tip-t">—</div>
+      <div class="tip-gain" id="tip-g">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 8V2M2 5l3-3 3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        —
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-secondary" onclick="doReset()">Apply to another role</button>
+  <div class="foot" style="margin-top:1rem">Scored by <a href="#">TopScreen.ai</a> · <a href="#">Privacy</a></div>
+</div>
+
+</div><!-- /col -->
+</div><!-- /wrap -->
+
+<script>
+'use strict';
+
+// ── URL params ──────────────────────────────────────
+var P = Object.fromEntries(new URLSearchParams(location.search));
+var JOB_TITLE = dec(P.title) || 'Open Position';
+var COMPANY   = dec(P.company) || 'This Company';
+var JOB_ROLE  = dec(P.role) || 'General';
+var JOB_LOC   = dec(P.loc) || '';
+var JOB_PAY   = dec(P.pay) || '';
+var JOB_COHORT= P.cohort || '';
+var cvRaw = '';
+
+function dec(v) { try { return v ? decodeURIComponent(v) : ''; } catch(e) { return v || ''; } }
+
+// Populate job banner
+document.title = JOB_TITLE + ' — Apply via TopScreen';
+document.getElementById('jb-logo').textContent = COMPANY.substring(0,2).toUpperCase();
+document.getElementById('jb-title').textContent = JOB_TITLE;
+document.getElementById('r-company').textContent = COMPANY;
+var locEl = document.getElementById('jb-loc');
+locEl.innerHTML = '<svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M5.5 1C3.6 1 2 2.5 2 4.4c0 2.7 3.5 5.6 3.5 5.6s3.5-2.9 3.5-5.6C9 2.5 7.4 1 5.5 1z" stroke="currentColor" stroke-width="1.1"/><circle cx="5.5" cy="4.4" r="1.1" fill="currentColor"/></svg>' + (JOB_LOC || 'Location TBC');
+if (JOB_PAY) {
+  document.getElementById('jb-pay').style.display = 'flex';
+  document.getElementById('jb-pay-text').textContent = JOB_PAY;
+}
+if (JOB_COHORT) document.getElementById('i-cohort').value = JOB_COHORT;
+
+// ── File handling ────────────────────────────────────
+function doDrag(e, on) { e.preventDefault(); document.getElementById('dzone').classList.toggle('drag', !!on); }
+function doDrop(e) { e.preventDefault(); document.getElementById('dzone').classList.remove('drag'); if (e.dataTransfer.files[0]) doFile2(e.dataTransfer.files[0]); }
+function doFile(inp) { if (inp.files[0]) doFile2(inp.files[0]); }
+function doFile2(file) {
+  var dz = document.getElementById('dzone');
+  var icon = document.getElementById('dz-icon');
+  var title = document.getElementById('dz-title');
+  dz.classList.add('done');
+  icon.innerHTML = '<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 9l4.5 4.5L14 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  icon.style.background = 'var(--green)';
+  title.textContent = 'Uploaded';
+  title.style.color = 'var(--green)';
+  document.getElementById('dz-name').textContent = file.name;
+
+  if (!file.name.toLowerCase().endsWith('.pdf')) {
+    var r = new FileReader();
+    r.onload = function(e) {
+      cvRaw = e.target.result;
+      document.getElementById('cv-text').value = cvRaw.substring(0, 6000);
+    };
+    r.readAsText(file);
+  } else {
+    cvRaw = 'PDF: ' + file.name;
+  }
+}
+
+function autoChort(v) {
+  var a = parseInt(v);
+  if (!isNaN(a)) {
+    document.getElementById('i-cohort').value = a <= 22 ? 'fresher' : a <= 35 ? 'mid' : 'senior';
+  }
+}
+
+// ── Screens ──────────────────────────────────────────
+function show(id) {
+  ['s-form','s-load','s-result'].forEach(function(s) {
+    document.getElementById(s).classList.remove('on');
+  });
+  document.getElementById(id).classList.add('on');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Loading animation ────────────────────────────────
+var LOAD_STEPS = [
+  ['Analysing your profile', 'Reading education, experience and output signals'],
+  ['Scoring your background', 'Applying role-specific weights across three blocks'],
+  ['Calibrating percentile', 'Benchmarking against the global candidate pool'],
+  ['Writing your assessment', 'Identifying strengths, gaps and your top action']
+];
+
+function runLoader() {
+  var i = 0;
+  function next() {
+    if (i > 0) {
+      var prev = document.getElementById('step-' + (i-1));
+      prev.classList.remove('active');
+      prev.classList.add('done');
+    }
+    if (i < LOAD_STEPS.length) {
+      var el = document.getElementById('step-' + i);
+      if (el) el.classList.add('active');
+      document.getElementById('load-t').textContent = LOAD_STEPS[i][0];
+      document.getElementById('load-s').textContent = LOAD_STEPS[i][1];
+      i++;
+      if (i < LOAD_STEPS.length) setTimeout(next, 1900);
+    }
+  }
+  next();
+}
+
+// ── Submit ───────────────────────────────────────────
+async function doSubmit() {
+  var fn = document.getElementById('i-fn').value.trim();
+  var ln = document.getElementById('i-ln').value.trim();
+  var em = document.getElementById('i-em').value.trim();
+  var cohort = document.getElementById('i-cohort').value;
+  var cv = document.getElementById('cv-text').value.trim() || cvRaw;
+  var errBox = document.getElementById('err-box');
+  var errTxt = document.getElementById('err-text');
+
+  // clear
+  ['i-fn','i-ln','i-em','cv-text'].forEach(function(id) { document.getElementById(id).style.borderColor = ''; });
+  errBox.classList.remove('on');
+
+  var bad = [];
+  if (!fn) { bad.push('First name'); document.getElementById('i-fn').style.borderColor = 'var(--red)'; }
+  if (!ln) { bad.push('Last name');  document.getElementById('i-ln').style.borderColor = 'var(--red)'; }
+  if (!em || !em.includes('@')) { bad.push('Valid email'); document.getElementById('i-em').style.borderColor = 'var(--red)'; }
+  if (!cv && document.getElementById('dz-name').textContent.length < 2) {
+    bad.push('CV (upload or paste below)');
+    document.getElementById('cv-text').style.borderColor = 'var(--red)';
+  }
+
+  if (bad.length) {
+    errTxt.textContent = 'Please complete: ' + bad.join(', ');
+    errBox.classList.add('on');
+    document.getElementById('i-fn').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    return;
+  }
+
+  show('s-load');
+  runLoader();
+
+  try {
+    var cvFinal = cv || ('PDF submitted: ' + document.getElementById('dz-name').textContent);
+    var resp = await fetch('/api/score', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        cv_text: cvFinal,
+        role: JOB_ROLE,
+        cohort: cohort,
+        applicant: { first_name: fn, last_name: ln || '', email: em, visa: document.getElementById('i-visa').value },
+        job: { id: P.job || null, title: JOB_TITLE, company: COMPANY }
+      })
+    });
+
+    if (!resp.ok) {
+      var msg = await resp.text().catch(function() { return ''; });
+      throw new Error('HTTP ' + resp.status + ': ' + msg.substring(0, 180));
+    }
+
+    var data = await resp.json();
+    var raw = (data.content || []).map(function(b) { return b.text || ''; }).join('').replace(/```json|```/g,'').trim();
+    if (!raw) throw new Error('Empty response from scoring engine');
+    var result = JSON.parse(raw);
+
+    setTimeout(function() {
+      renderResult(result, fn, cohort);
+      show('s-result');
+    }, 500);
+
+  } catch (e) {
+    show('s-form');
+    errTxt.textContent = 'Scoring failed: ' + e.message;
+    errBox.classList.add('on');
+  }
+}
+
+// ── Render result ────────────────────────────────────
+function renderResult(r, name, cohort) {
+  var pct = Math.round((r.percentile || 50) * 10) / 10;
+  var style = getStyle(pct);
+
+  // Ring
+  var arc = document.getElementById('ring-arc');
+  arc.style.stroke = style.color;
+  setTimeout(function() { arc.style.strokeDashoffset = String(389 - (pct / 100) * 389); }, 120);
+
+  // Number
+  var pctEl = document.getElementById('r-pct');
+  pctEl.textContent = pct.toFixed(1);
+  pctEl.style.color = style.color;
+
+  // Badge
+  var badge = document.getElementById('r-badge');
+  badge.textContent = r.tier_label || tierLabel(pct);
+  badge.style.background = style.bg;
+  badge.style.color = style.color;
+  badge.style.border = '1px solid ' + style.border;
+
+  document.getElementById('r-headline').textContent = r.headline || name + ' — scored';
+  document.getElementById('r-summary').textContent  = r.summary  || '';
+
+  // Score rows
+  var rows = {
+    fresher: [
+      { l: 'Projects & Output', v: r.projects_score  || 0, c: 'var(--gold)' },
+      { l: 'Education & GPA',   v: r.education_score || 0, c: 'var(--blue)' },
+      { l: 'Domain Fit',         v: r.extra_score     || 0, c: '#7C3AED'     }
+    ],
+    mid: [
+      { l: 'Experience & Impact', v: r.experience_score || 0, c: 'var(--blue)' },
+      { l: 'Education & MBA',     v: r.education_score  || 0, c: '#7C3AED'     },
+      { l: 'Domain Fit',           v: r.other_score      || 0, c: 'var(--gold)' }
+    ],
+    senior: [
+      { l: 'Leadership & Scale', v: r.experience_score || 0, c: 'var(--green)' },
+      { l: 'Education & MBA',     v: r.education_score  || 0, c: '#7C3AED'      },
+      { l: 'Domain Fit',           v: r.other_score      || 0, c: 'var(--gold)'  }
+    ]
+  }[cohort] || [];
+
+  var rowsEl = document.getElementById('score-rows');
+  rowsEl.innerHTML = rows.map(function(row, i) {
+    return '<div class="score-row">'
+      + '<div class="score-row-label">' + row.l + '</div>'
+      + '<div class="score-row-bar"><div class="score-row-fill" id="sr' + i + '" style="background:' + row.c + '"></div></div>'
+      + '<div class="score-row-val" style="color:' + row.c + '">' + row.v + '</div>'
+      + '</div>';
+  }).join('');
+  setTimeout(function() {
+    rows.forEach(function(row, i) {
+      var el = document.getElementById('sr' + i);
+      if (el) el.style.width = row.v + '%';
+    });
+  }, 200);
+
+  // Strengths / gaps
+  document.getElementById('sg-s').innerHTML = (r.strengths || []).map(function(s) {
+    return '<div class="sg-item"><div class="sg-dot" style="background:var(--green)"></div><span>' + s + '</span></div>';
+  }).join('');
+  document.getElementById('sg-g').innerHTML = (r.gaps || []).map(function(g) {
+    return '<div class="sg-item"><div class="sg-dot" style="background:var(--red)"></div><span>' + g + '</span></div>';
+  }).join('');
+
+  // Tip
+  var ft = r.free_tip || {};
+  document.getElementById('tip-t').textContent = ft.action || 'Add quantified outcomes to each project and role description.';
+  document.getElementById('tip-g').innerHTML = '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 8V2M2 5l3-3 3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>' + (ft.gain || '+5 percentile points');
+}
+
+function getStyle(p) {
+  if (p >= 90) return { color: 'var(--gold)',  bg: 'var(--gold-light)',  border: 'var(--gold-border)'  };
+  if (p >= 75) return { color: 'var(--blue)',  bg: 'var(--blue-light)',  border: 'var(--blue-border)'  };
+  if (p >= 55) return { color: '#7C3AED',      bg: '#F5F3FF',            border: 'rgba(124,58,237,.2)' };
+  return               { color: 'var(--ink3)', bg: 'var(--bg)',          border: 'var(--border2)'      };
+}
+function tierLabel(p) {
+  if (p >= 99)   return 'Top 1%';
+  if (p >= 97)   return 'Top 3%';
+  if (p >= 95)   return 'Top 5%';
+  if (p >= 90)   return 'Top 10%';
+  if (p >= 80)   return 'Top 20%';
+  if (p >= 70)   return 'Top 30%';
+  if (p >= 60)   return 'Above Average';
+  if (p >= 40)   return 'Average';
+  return 'Below Average';
+}
+
+function doReset() {
+  cvRaw = '';
+  ['i-fn','i-ln','i-em','i-age','cv-text'].forEach(function(id) {
+    var el = document.getElementById(id); if (el) el.value = ''; el.style.borderColor = '';
+  });
+  var dz = document.getElementById('dzone');
+  dz.classList.remove('done','drag');
+  var icon = document.getElementById('dz-icon');
+  icon.style.background = '';
+  icon.innerHTML = '<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2v10M6 5l3-3 3 3" stroke="#8C93AD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2.5 13.5v2h13v-2" stroke="#8C93AD" stroke-width="1.5" stroke-linecap="round"/></svg>';
+  document.getElementById('dz-title').textContent = 'Drop your CV here';
+  document.getElementById('dz-title').style.color = '';
+  document.getElementById('dz-name').textContent = '';
+  ['step-0','step-1','step-2','step-3'].forEach(function(id) {
+    var el = document.getElementById(id); el.className = 'step-item';
+  });
+  var arc = document.getElementById('ring-arc');
+  arc.style.transition = 'none'; arc.style.strokeDashoffset = '389';
+  document.getElementById('err-box').classList.remove('on');
+  show('s-form');
+}
+</script>
+</body>
+</html>

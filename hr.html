@@ -874,6 +874,15 @@ tbody tr:hover td{background:var(--bg);cursor:pointer}
 
       <!-- DASHBOARD -->
       <div id="tab-dashboard" class="tab show">
+        <!-- Live refresh banner -->
+        <div id="db-banner" style="display:none;margin-bottom:1.25rem;padding:10px 16px;background:var(--greenb);border:1px solid var(--greenr);border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--green)">
+            <div class="live"></div>
+            Connected to database — showing real candidate applications
+          </div>
+          <button class="btn btn-green btn-sm" onclick="refreshCandidates()">Refresh</button>
+        </div>
+
         <div class="stats-row">
           <div class="stat"><div class="stat-accent" style="background:var(--gold)"></div><div class="stat-lbl">Active Jobs</div><div class="stat-val" id="st-jobs">0</div><div class="stat-sub">Open postings</div></div>
           <div class="stat"><div class="stat-accent" style="background:var(--blue)"></div><div class="stat-lbl">Total Applicants</div><div class="stat-val" id="st-apps">0</div><div class="stat-sub">Across all roles</div></div>
@@ -1285,6 +1294,8 @@ function doLogin(){
   fetchCandidatesFromDB().then(function(rows) {
     if (rows && rows.length > 0) {
       state.candidates = rows;
+      var b = document.getElementById('db-banner');
+      if (b) b.style.display = 'flex';
     }
     renderAll();
   }).catch(function() { renderAll(); });
@@ -1341,8 +1352,28 @@ function renderJobs(){
   el.innerHTML=state.jobs.map(function(j){
     var cnt=state.candidates.filter(function(x){return x.role===j.role;}).length;
     var top=state.candidates.filter(function(x){return x.role===j.role&&x.percentile>=90;}).length;
-    return '<div class="card card-hover mb2"><div class="flex jb aic wrap" style="gap:12px"><div style="flex:1"><div style="font-size:17px;font-weight:700;letter-spacing:-.3px;color:var(--tx);margin-bottom:5px">'+j.title+'</div><div style="display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--t2)"><span>'+j.loc+'</span><span>'+j.pay+'</span><span>'+j.cohort+'</span><span>Min: '+j.minpct+'th+</span><span>Visa: '+j.visa+'</span></div></div><div class="flex gap6 aic"><span class="pill pill-gray">'+cnt+' applicants</span><span class="pill pill-gold">'+top+' top 10%</span><button class="btn btn-ghost btn-xs" onclick="goTab(\'candidates\')">View all</button><button class="btn btn-red btn-xs" onclick="deleteJob('+j.id+',event)">Remove</button></div></div>'+(j.desc?'<div style="margin-top:11px;font-size:13px;color:var(--t2);font-weight:300;line-height:1.65;padding-top:11px;border-top:1px solid var(--b1)">'+j.desc+'</div>':'')+'</div>';
+    return '<div class="card mb2" style="border:1.5px solid var(--b1)">'    +'<div class="flex jb aic wrap" style="gap:12px">'    +'<div style="flex:1"><div style="font-size:17px;font-weight:700;letter-spacing:-.3px;color:var(--tx);margin-bottom:5px">'+j.title+'</div>'    +'<div style="display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--t2)"><span>'+j.loc+'</span><span>'+j.pay+'</span><span>'+j.cohort+'</span><span>Min: '+j.minpct+'th+</span><span>Visa: '+j.visa+'</span></div></div>'    +'<div class="flex gap6 aic wrap">'    +'<span class="pill pill-gray">'+cnt+' applicants</span>'    +'<span class="pill pill-gold">'+top+' top 10%</span>'    +'<button class="btn btn-ghost btn-xs" onclick="goTab(\'candidates\')">View candidates</button>'    +'<button class="btn btn-red btn-xs" onclick="deleteJob('+j.id+',event)">Remove</button>'    +'</div></div>'    +'<div style="margin-top:12px;padding:10px 14px;background:var(--bg);border-radius:9px;border:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">'    +'<div>'    +'<div style="font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px">Apply link — share this with candidates</div>'    +'<div style="font-size:12px;color:var(--t2);font-family:Space Mono,monospace;word-break:break-all">'+(j.applyLink||'Generating...')+'</div>'    +'</div>'    +'<button class="btn btn-gold btn-sm" onclick="copyApplyLink(event,\''+encodeURIComponent(j.applyLink||'')+'\')">Copy link</button>'    +'</div>'    +(j.desc?'<div style="margin-top:11px;font-size:13px;color:var(--t2);font-weight:300;line-height:1.65;padding-top:11px;border-top:1px solid var(--b1)">'+j.desc+'</div>':'')    +'</div>';
   }).join('');
+}
+
+function copyApplyLink(e, encodedLink) {
+  e.stopPropagation();
+  var link = decodeURIComponent(encodedLink);
+  if (!link) { alert('Post a job first to generate an apply link.'); return; }
+  navigator.clipboard.writeText(link).then(function() {
+    var btn = e.target;
+    var orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    btn.style.background = 'var(--greenb)';
+    btn.style.color = 'var(--green)';
+    setTimeout(function() {
+      btn.textContent = orig;
+      btn.style.background = '';
+      btn.style.color = '';
+    }, 2000);
+  }).catch(function() {
+    prompt('Copy this apply link:', link);
+  });
 }
 
 function openPostJob(){['pj-title','pj-loc','pj-pay','pj-desc'].forEach(function(id){document.getElementById(id).value='';});document.getElementById('pj-err').classList.remove('on');document.getElementById('modal-postjob').classList.add('show');}
@@ -1552,6 +1583,17 @@ function processPayment(){
   err.classList.remove('on');var btn=document.getElementById('ck-btn');btn.textContent='Processing...';btn.disabled=true;
   setTimeout(function(){document.getElementById('ck-ok').classList.add('on');var lbl=checkoutPlan==='starter'?'Starter ($499/mo)':'Growth ($1,499/mo)';document.getElementById('co-pl').textContent=lbl.toUpperCase();document.getElementById('curr-plan').textContent=lbl;setTimeout(function(){closeModal('modal-checkout');},2200);},1800);
 }
+function refreshCandidates() {
+  fetchCandidatesFromDB().then(function(rows) {
+    if (rows && rows.length > 0) {
+      state.candidates = rows;
+      renderAll();
+      var b = document.getElementById('db-banner');
+      if (b) b.style.display = 'flex';
+    }
+  }).catch(function(e) { console.warn('Refresh failed', e); });
+}
+
 function updateBadge(){var n=state.candidates.filter(function(c){return c.stage==='Applied';}).length;var b=document.getElementById('new-badge');b.textContent=n;b.style.display=n>0?'inline':'none';}
 </script>
 </body>

@@ -797,6 +797,12 @@ tbody tr:hover td{background:var(--bg);cursor:pointer}
       <div class="frow"><label class="lbl">Invite code</label><input type="text" class="inp" id="l-code" placeholder="APEX-XXXX" style="text-transform:uppercase;letter-spacing:.1em" onkeydown="if(event.key==='Enter')doLogin()"></div>
       <button class="btn btn-gold" style="width:100%;margin-top:.5rem" onclick="doLogin()">Sign in to portal &rarr;</button>
       <div style="margin-top:1.25rem;text-align:center;font-size:12px;color:var(--t3)">Demo: use any email + code <code style="color:var(--gold);background:var(--goldb);padding:2px 8px;border-radius:5px">APEX-DEMO</code></div>
+      <div style="margin-top:1.5rem;border-top:1px solid var(--b1);padding-top:1.25rem">
+        <div style="font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.75rem">Connect your database (optional)</div>
+        <div class="frow"><label class="lbl" style="font-size:10px">Supabase URL</label><input type="text" class="inp" id="l-supa-url" placeholder="https://xxx.supabase.co" style="font-size:12px"></div>
+        <div class="frow" style="margin-bottom:.5rem"><label class="lbl" style="font-size:10px">Supabase Anon Key</label><input type="text" class="inp" id="l-supa-key" placeholder="eyJ..." style="font-size:12px"></div>
+        <div style="font-size:11px;color:var(--t3);line-height:1.5">Leave blank to use demo data. Add Supabase keys to see real candidate applications from your apply page.</div>
+      </div>
     </div>
   </div>
 </div>
@@ -1176,6 +1182,84 @@ var SOURCE_PROFILES = [
 function showLanding(){document.getElementById('page-landing').classList.add('show');document.getElementById('page-login').classList.remove('show');document.getElementById('page-app').classList.add('hidden');}
 function showLogin(){document.getElementById('page-landing').classList.remove('show');document.getElementById('page-login').classList.add('show');document.getElementById('page-app').classList.add('hidden');setTimeout(function(){document.getElementById('l-email').focus();},100);}
 
+// ── SUPABASE ──────────────────────────────────────────
+var SUPA_URL = '';
+var SUPA_KEY = '';
+
+async function fetchCandidatesFromDB() {
+  if (!SUPA_URL || !SUPA_KEY) return null;
+  try {
+    var r = await fetch(SUPA_URL + '/rest/v1/applications?select=*&order=percentile.desc', {
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': 'Bearer ' + SUPA_KEY,
+        'Content-Type': 'application/json'
+      }
+    });
+    if (!r.ok) return null;
+    var rows = await r.json();
+    return rows.map(function(row) {
+      return {
+        id:              row.id,
+        name:            (row.first_name || '') + ' ' + (row.last_name || ''),
+        email:           row.email || '',
+        role:            row.role || row.job_title || '',
+        cohort:          row.cohort || 'fresher',
+        percentile:      row.percentile || 0,
+        match:           Math.round((row.percentile || 0) * 0.96),
+        stage:           row.stage || 'Applied',
+        intl:            row.visa === 'needs',
+        applied:         timeAgo(row.created_at),
+        outreach:        'None',
+        education_score: row.education_score || 0,
+        projects_score:  row.projects_score  || 0,
+        extra_score:     row.domain_score    || 0,
+        experience_score:row.projects_score  || 0,
+        other_score:     row.domain_score    || 0,
+        summary:         row.summary         || '',
+        headline:        row.headline        || '',
+        strengths:       tryParse(row.strengths, []),
+        gaps:            tryParse(row.gaps, []),
+        free_tip:        tryParse(row.free_tip, {}),
+        cv_text:         row.cv_text         || '',
+        job_id:          row.job_id          || null
+      };
+    });
+  } catch(e) {
+    console.warn('Supabase fetch failed:', e.message);
+    return null;
+  }
+}
+
+async function updateStageInDB(id, stage) {
+  if (!SUPA_URL || !SUPA_KEY) return;
+  await fetch(SUPA_URL + '/rest/v1/applications?id=eq.' + id, {
+    method: 'PATCH',
+    headers: {
+      'apikey': SUPA_KEY,
+      'Authorization': 'Bearer ' + SUPA_KEY,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=minimal'
+    },
+    body: JSON.stringify({ stage: stage })
+  }).catch(function(){});
+}
+
+function tryParse(val, fallback) {
+  if (Array.isArray(val) || (typeof val === 'object' && val !== null)) return val;
+  try { return JSON.parse(val); } catch { return fallback; }
+}
+
+function timeAgo(isoStr) {
+  if (!isoStr) return 'Just now';
+  var diff = (Date.now() - new Date(isoStr)) / 1000;
+  if (diff < 60) return 'Just now';
+  if (diff < 3600) return Math.floor(diff/60) + ' mins ago';
+  if (diff < 86400) return Math.floor(diff/3600) + ' hours ago';
+  return Math.floor(diff/86400) + ' days ago';
+}
+// ──────────────────────────────────────────────────────
+
 function doLogin(){
   var email=document.getElementById('l-email').value.trim();
   var code=document.getElementById('l-code').value.trim().toUpperCase();
@@ -1185,6 +1269,10 @@ function doLogin(){
   err.classList.remove('on');
   var co=email.split('@')[1].split('.')[0];co=co.charAt(0).toUpperCase()+co.slice(1);
   state.company=co;state.email=email;
+  // Pick up optional Supabase config
+  var supaUrlEl=document.getElementById('l-supa-url');var supaKeyEl=document.getElementById('l-supa-key');
+  if(supaUrlEl&&supaUrlEl.value.trim()) SUPA_URL=supaUrlEl.value.trim();
+  if(supaKeyEl&&supaKeyEl.value.trim()) SUPA_KEY=supaKeyEl.value.trim();
   state.candidates=JSON.parse(JSON.stringify(DEMO_CANDS));
   state.team=[{name:'You',email:email,role:'Admin',you:true}];
   state.sequences=JSON.parse(JSON.stringify(DEMO_SEQUENCES));
@@ -1193,7 +1281,13 @@ function doLogin(){
   document.getElementById('co-pl').textContent='FREE TRIAL';
   document.getElementById('page-login').classList.remove('show');
   document.getElementById('page-app').classList.remove('hidden');
-  renderAll();
+  // Try to load real candidates from Supabase
+  fetchCandidatesFromDB().then(function(rows) {
+    if (rows && rows.length > 0) {
+      state.candidates = rows;
+    }
+    renderAll();
+  }).catch(function() { renderAll(); });
 }
 function doLogout(){document.getElementById('page-app').classList.add('hidden');showLanding();}
 
@@ -1256,10 +1350,29 @@ function closeModal(id){document.getElementById(id).classList.remove('show');}
 function submitJob(){
   var title=document.getElementById('pj-title').value.trim();var loc=document.getElementById('pj-loc').value.trim();var err=document.getElementById('pj-err');
   if(!title||!loc){err.textContent='Please fill in job title and location.';err.classList.add('on');return;}
-  state.jobs.push({id:Date.now(),title:title,role:document.getElementById('pj-role').value,loc:loc,pay:document.getElementById('pj-pay').value||'Competitive',cohort:document.getElementById('pj-cohort').value,minpct:parseInt(document.getElementById('pj-minpct').value)||0,visa:document.getElementById('pj-visa').value,desc:document.getElementById('pj-desc').value.trim()});
+  var id=Date.now();
+  var role=document.getElementById('pj-role').value;
+  var cohort=document.getElementById('pj-cohort').value;
+  var visa=document.getElementById('pj-visa').value;
+  var pay=document.getElementById('pj-pay').value||'Competitive';
+  // Generate shareable apply link
+  var base=window.location.origin+'/apply';
+  var applyLink=base+'?job='+id+'&title='+encodeURIComponent(title)+'&company='+encodeURIComponent(state.company)+'&role='+encodeURIComponent(role)+'&loc='+encodeURIComponent(loc)+'&cohort='+cohort+'&visa='+visa+'&pay='+encodeURIComponent(pay);
+  state.jobs.push({id:id,title:title,role:role,loc:loc,pay:pay,cohort:cohort,minpct:parseInt(document.getElementById('pj-minpct').value)||0,visa:visa,desc:document.getElementById('pj-desc').value.trim(),applyLink:applyLink});
   closeModal('modal-postjob');updatePipeSelect();renderAll();goTab('jobs');
 }
 function deleteJob(id,e){e.stopPropagation();if(!confirm('Remove this posting?'))return;state.jobs=state.jobs.filter(function(j){return j.id!==id;});renderJobs();renderDash();}
+function copyLink(e,link){
+  e.stopPropagation();
+  if(!link){alert('Post a job to generate an apply link.');return;}
+  navigator.clipboard.writeText(link).then(function(){
+    var btn=e.target;var orig=btn.textContent;
+    btn.textContent='Copied!';btn.style.background='var(--greenb)';btn.style.color='var(--green)';btn.style.borderColor='var(--greenr)';
+    setTimeout(function(){btn.textContent=orig;btn.style.background='';btn.style.color='';btn.style.borderColor='';},2000);
+  }).catch(function(){
+    prompt('Copy this apply link:',link);
+  });
+}
 function updatePipeSelect(){var sel=document.getElementById('pipe-job');var cur=sel.value;sel.innerHTML='<option value="">All jobs</option>'+state.jobs.map(function(j){return '<option value="'+j.role+'">'+j.title+'</option>';}).join('');sel.value=cur;}
 
 function renderCandidates(){
@@ -1308,8 +1421,11 @@ function renderPipeline(){
 function advanceStage(id,e){
   if(e)e.stopPropagation();var c=state.candidates.find(function(x){return x.id===id;});if(!c)return;
   var i=STAGES.indexOf(c.stage);
-  if(i<STAGES.length-1){c.stage=STAGES[i+1];renderCandidates();renderPipeline();renderDash();if(openDrawerId===id)openDrawer(id);}
-  else alert(c.name+' is already at the final stage.');
+  if(i<STAGES.length-1){
+    c.stage=STAGES[i+1];
+    updateStageInDB(id, c.stage);
+    renderCandidates();renderPipeline();renderDash();if(openDrawerId===id)openDrawer(id);
+  } else alert(c.name+' is already at the final stage.');
 }
 function advanceFromKanban(id){advanceStage(id,null);}
 
@@ -1408,6 +1524,7 @@ function openDrawer(id){
     +'<div class="sc-rows mb2">'+bars+'</div>'
     +'<div style="font-family:Space Mono,monospace;font-size:10px;color:var(--t3);letter-spacing:.1em;margin-bottom:.75rem;font-weight:700;text-transform:uppercase">AI assessment</div>'
     +'<div style="font-size:13px;color:var(--t2);line-height:1.75;margin-bottom:2rem;padding:14px 16px;background:var(--bg);border-radius:10px;border-left:3px solid var(--gold);font-style:italic">'+c.summary+'</div>'
+    +(c.cv_text?'<div style="font-family:Space Mono,monospace;font-size:10px;color:var(--t3);letter-spacing:.1em;margin-bottom:.75rem;font-weight:700;text-transform:uppercase">Full CV</div><pre style="font-size:12px;color:var(--t2);line-height:1.7;white-space:pre-wrap;word-break:break-word;background:var(--bg);padding:14px;border-radius:10px;border:1px solid var(--b1);max-height:300px;overflow-y:auto;margin-bottom:2rem">'+c.cv_text.replace(/</g,"&lt;").replace(/>/g,"&gt;").substring(0,3000)+'</pre>':'')
     +'<div class="flex gap10" style="flex-wrap:wrap">'
     +(si<STAGES.length-1?'<button class="btn btn-gold btn-sm" onclick="advanceStage('+c.id+',null)">Move to '+STAGES[si+1]+'</button>':'<span class="pill pill-green">Final stage reached</span>')
     +'<button class="btn btn-purple btn-sm" onclick="reviewOutreach('+c.id+')">Send outreach</button>'

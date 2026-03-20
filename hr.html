@@ -391,6 +391,7 @@ tbody tr:hover td{background:var(--bg);cursor:pointer}
     <a class="nav-link" href="#features">Features</a>
     <a class="nav-link" href="#why">vs ATS</a>
     <a class="nav-link" href="#pricing">Pricing</a>
+    <a class="nav-link" href="/apply" style="color:var(--green);font-weight:600">For candidates &rarr;</a>
   </div>
   <div class="flex aic gap10">
     <button class="btn btn-ghost btn-sm" onclick="showLogin()">Sign in</button>
@@ -782,7 +783,7 @@ tbody tr:hover td{background:var(--bg);cursor:pointer}
 </div></div>
 
 
-<div class="land-footer"><div class="land-wrap">apex<b>.</b>HR &bull; AI Talent Intelligence &bull; One platform for every hiring use case &bull; <a href="/cdn-cgi/l/email-protection#e189848d8d8ea18091849989889384cf828e"><span class="__cf_email__" data-cfemail="761e131a1a19361706130e1e1f0413581519">[email&#160;protected]</span></a></div></div>
+<div class="land-footer"><div class="land-wrap">Top<b>Screen</b> &bull; AI Talent Intelligence &bull; One platform for every hiring use case &bull; <a href="/cdn-cgi/l/email-protection#e189848d8d8ea18091849989889384cf828e"><span class="__cf_email__" data-cfemail="761e131a1a19361706130e1e1f0413581519">[email&#160;protected]</span></a></div></div>
 </div>
 
 <!-- LOGIN -->
@@ -790,13 +791,13 @@ tbody tr:hover td{background:var(--bg);cursor:pointer}
   <div class="login-box">
     <div class="login-back" onclick="showLanding()">&#8592; Back to overview</div>
     <div class="login-card">
-      <div class="login-logo">apex<b>.</b> HR</div>
-      <div class="login-sub">Sign in to your talent intelligence portal. No invite code? <a href="/cdn-cgi/l/email-protection#a3cbc6cfcfcce3c2d3c6dbcbcad1c68dc0cc" style="color:var(--gold);text-decoration:none">Contact us to get access.</a></div>
+      <div class="login-logo">Top<b>Screen</b></div>
+      <div class="login-sub">Sign in to your hiring portal. Enter your work email to access the platform.</div>
       <div id="login-err" class="alert alert-err"></div>
       <div class="frow"><label class="lbl">Work email</label><input type="email" class="inp" id="l-email" placeholder="you@company.com" onkeydown="if(event.key==='Enter')doLogin()"></div>
-      <div class="frow"><label class="lbl">Invite code</label><input type="text" class="inp" id="l-code" placeholder="APEX-XXXX" style="text-transform:uppercase;letter-spacing:.1em" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <input type="hidden" id="l-code" value="APEX-DEMO">
       <button class="btn btn-gold" style="width:100%;margin-top:.5rem" onclick="doLogin()">Sign in to portal &rarr;</button>
-      <div style="margin-top:1.25rem;text-align:center;font-size:12px;color:var(--t3)">Demo: use any email + code <code style="color:var(--gold);background:var(--goldb);padding:2px 8px;border-radius:5px">APEX-DEMO</code></div>
+      <div style="margin-top:1.25rem;text-align:center;font-size:12px;color:var(--t3)">Enter any email to access the demo &mdash; no invite code needed</div>
       <div style="margin-top:1.5rem;border-top:1px solid var(--b1);padding-top:1.25rem">
         <div style="font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.75rem">Connect your database (optional)</div>
         <div class="frow"><label class="lbl" style="font-size:10px">Supabase URL</label><input type="text" class="inp" id="l-supa-url" placeholder="https://xxx.supabase.co" style="font-size:12px"></div>
@@ -810,7 +811,7 @@ tbody tr:hover td{background:var(--bg);cursor:pointer}
 <div id="page-app" class="hidden">
 <div class="shell">
   <div class="sidebar">
-    <div class="sb-top"><div class="sb-brand">apex<b>.</b> HR</div><div class="sb-sub">Talent Intelligence Platform</div></div>
+    <div class="sb-top"><div class="sb-brand" onclick="showLanding()" style="cursor:pointer">Top<b>Screen</b></div><div class="sb-sub">Talent Intelligence Platform</div></div>
     <div class="sb-sec">Overview</div>
     <div class="sb-item on" onclick="goTab('dashboard')" id="nav-dashboard">
       <svg class="sb-icon" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.4"/><rect x="9" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.4"/><rect x="2" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.4"/><rect x="9" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.4"/></svg>
@@ -1271,10 +1272,8 @@ function timeAgo(isoStr) {
 
 function doLogin(){
   var email=document.getElementById('l-email').value.trim();
-  var code=document.getElementById('l-code').value.trim().toUpperCase();
   var err=document.getElementById('login-err');
-  if(!email||!email.includes('@')){err.textContent='Enter a valid work email.';err.classList.add('on');return;}
-  if(!INVITE_CODES.includes(code)){err.textContent='Invalid invite code. Contact hello@apexhire.co for access.';err.classList.add('on');return;}
+  if(!email||!email.includes('@')){err.textContent='Enter a valid work email address.';err.classList.add('on');return;}
   err.classList.remove('on');
   var co=email.split('@')[1].split('.')[0];co=co.charAt(0).toUpperCase()+co.slice(1);
   state.company=co;state.email=email;
